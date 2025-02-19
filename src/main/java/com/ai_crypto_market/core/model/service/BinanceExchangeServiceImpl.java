@@ -1,8 +1,11 @@
 package com.ai_crypto_market.core.model.service;
 
-import com.ai_crypto_market.core.common.annotation.Binance;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@Binance
+
+@Service
+@Qualifier("binanceExchangeService")
 public class BinanceExchangeServiceImpl implements ExchangeService {
     @Override
     public String executeBuy(Long amount) {

@@ -1,8 +1,10 @@
 package com.ai_crypto_market.core.model.service;
 
-import com.ai_crypto_market.core.common.annotation.CoinMarketCap;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@CoinMarketCap
+@Service
+@Qualifier("coinMarketCapExchangeService")
 public class CoinMarketCapExchangeServiceImpl implements ExchangeService {
     @Override
     public String executeBuy(Long amount) {

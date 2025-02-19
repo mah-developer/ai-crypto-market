@@ -1,16 +1,21 @@
 package com.ai_crypto_market.core.model.service;
 
-import com.ai_crypto_market.core.common.annotation.Ichimoku;
+
+import com.ai_crypto_market.core.model.entity.Indicator;
 import com.ai_crypto_market.core.model.entity.Stock;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 
-@Ichimoku
+@Service
+@Qualifier("ichimokuIndicatorService")
 public class IchimokuIndicatorServiceImpl implements IndicatorService {
-    public Map<String, String> getCurrentSignal(Stock stock) {
-        Map<String, String> result = new HashMap<>();
-        result.put("percent of buy", "percent of cell");
-        return result;
+    public Indicator getCurrentSignal(Stock stock) {
+        Indicator indicator = new Indicator();
+        indicator.setName("Ichimoku");
+        indicator.setAccuracy(50);
+        indicator.setBuyPercent(10);
+        indicator.setSellPercent(20);
+        return indicator;
     }
 }
