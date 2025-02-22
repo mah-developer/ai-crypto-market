@@ -1,6 +1,8 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Indicator;
+import com.ai_crypto_market.core.model.entity.IndicatorIchimoku;
+import com.ai_crypto_market.core.model.entity.IndicatorRSI;
 import com.ai_crypto_market.core.model.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,19 +12,19 @@ import org.springframework.stereotype.Service;
 public class TradeDeciderService {
 
     @Autowired
-    @Qualifier("rsiIndicatorService")
+    @Qualifier("IndicatorrsiService")
     private IndicatorService RSIIndicatorService;
 
     @Autowired
-    @Qualifier("ichimokuIndicatorService")
+    @Qualifier("IndicatorichimokuService")
     private IndicatorService ichimokuIndicatorService;
 
     @Autowired
-    @Qualifier("coinMarketCapExchangeService")
-    private ExchangeService coinMarketCapExchangeService;
+    @Qualifier("ExchangebingxService")
+    private ExchangeService bingXExchangeService;
 
     @Autowired
-    @Qualifier("binanceExchangeService")
+    @Qualifier("ExchangebinanceService")
     private ExchangeService binanceExchangeService;
 
     public String doTrade(Stock stock) {
@@ -37,12 +39,12 @@ public class TradeDeciderService {
             throw new IllegalStateException("Indicator services are not injected properly!");
         }
 
-        Indicator ichimokuCurrentSignal = ichimokuIndicatorService.getCurrentSignal(stock);
-        Indicator rsiCurrentSignal = RSIIndicatorService.getCurrentSignal(stock);
+        //IndicatorIchimoku ichimokuCurrentSignal = ichimokuIndicatorService.getCurrentSignal(stock);
+        //IndicatorRSI rsiCurrentSignal = RSIIndicatorService.getCurrentSignal(stock);
 
         // todo go to different method
-        int totalBuyPercent = ((ichimokuCurrentSignal.getBuyPercent() * ichimokuCurrentSignal.getAccuracy()) + (rsiCurrentSignal.getBuyPercent() * rsiCurrentSignal.getAccuracy())) / 2;
-        int totalSellPercent = ((ichimokuCurrentSignal.getSellPercent() * ichimokuCurrentSignal.getAccuracy()) + (rsiCurrentSignal.getSellPercent() * rsiCurrentSignal.getAccuracy())) / 2;
+        int totalBuyPercent = 0;//((ichimokuCurrentSignal.getBuyPercent() * ichimokuCurrentSignal.getAccuracy()) + (rsiCurrentSignal.getBuyPercent() * rsiCurrentSignal.getAccuracy())) / 2;
+        int totalSellPercent = 0;//((ichimokuCurrentSignal.getSellPercent() * ichimokuCurrentSignal.getAccuracy()) + (rsiCurrentSignal.getSellPercent() * rsiCurrentSignal.getAccuracy())) / 2;
 
         // todo go to different method
         if (totalBuyPercent > totalSellPercent) {
@@ -69,7 +71,7 @@ public class TradeDeciderService {
             case "binance":
                 return binanceExchangeService;
             case "coinMar":
-                return coinMarketCapExchangeService;
+                return bingXExchangeService;
             default:
                 return binanceExchangeService;
         }

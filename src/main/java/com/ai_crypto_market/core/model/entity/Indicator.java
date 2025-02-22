@@ -11,10 +11,6 @@ public class Indicator {
     private String name;
     @Column
     private int accuracy;
-    @Column
-    private int buyPercent;
-    @Column
-    private int sellPercent;
 
     public Long getId() {
         return id;
@@ -43,21 +39,5 @@ public class Indicator {
         return this;
     }
 
-    public int getBuyPercent() {
-        return buyPercent;
-    }
 
-    public Indicator setBuyPercent(int buyPercent) {
-        this.buyPercent = buyPercent;
-        return this;
-    }
-
-    public int getSellPercent() {
-        return sellPercent;
-    }
-
-    public Indicator setSellPercent(int sellPercent) {
-        this.sellPercent = sellPercent;
-        return this;
-    }
 }

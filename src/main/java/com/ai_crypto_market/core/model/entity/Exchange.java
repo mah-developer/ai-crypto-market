@@ -10,10 +10,10 @@ public class Exchange {
     @Column
     private String name;
 
+
     public Long getId() {
         return id;
     }
-
     public Exchange setId(Long id) {
         this.id = id;
         return this;
@@ -22,9 +22,9 @@ public class Exchange {
     public String getName() {
         return name;
     }
-
     public Exchange setName(String name) {
         this.name = name;
         return this;
     }
+
 }
