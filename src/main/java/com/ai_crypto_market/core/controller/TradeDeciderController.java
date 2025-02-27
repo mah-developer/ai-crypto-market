@@ -18,10 +18,10 @@ public class TradeDeciderController {
     public String doTrade() {
         // attached object
         Stock stock = new Stock();
-        stock.setName("BTCUSD");
+//        stock.setName("BTCUSD");
         Exchange exchange = new Exchange();
-        exchange.setName("binance");
-        stock.setExchange(exchange);
+//        exchange.setName("binance");
+//        stock.setExchange(exchange);
         System.out.println("trade executed on controller ...");
         return tradeDeciderService.doTrade(stock);
     }

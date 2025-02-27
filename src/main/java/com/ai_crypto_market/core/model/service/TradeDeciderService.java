@@ -32,7 +32,7 @@ public class TradeDeciderService {
         String result = "";
         System.out.println("trade calculation started");
 
-        ExchangeService exchangeService = exchangeFactory(stock.getExchange().getName());
+        ExchangeService exchangeService = exchangeFactory(stock.getName());
 
         // Null check
         if (ichimokuIndicatorService == null || RSIIndicatorService == null) {

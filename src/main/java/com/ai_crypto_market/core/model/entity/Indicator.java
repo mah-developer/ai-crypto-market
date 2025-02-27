@@ -2,24 +2,14 @@ package com.ai_crypto_market.core.model.entity;
 
 import jakarta.persistence.*;
 
-@Entity
-public class Indicator {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@MappedSuperclass
+public class Indicator extends AuditableEntity {
     @Column
     private String name;
     @Column
     private int accuracy;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Indicator setId(Long id) {
-        this.id = id;
-        return this;
-    }
+    // GETTERS AND SETTERS
 
     public String getName() {
         return name;
