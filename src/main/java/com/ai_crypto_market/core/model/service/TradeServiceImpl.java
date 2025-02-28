@@ -47,6 +47,11 @@ public class TradeServiceImpl implements TradeService {
     private SignalService strategyFactory(StrategyType strategyType) {
         switch (strategyType) {
             case FIBONACCI:
+                return signalServiceFibonacci;
+                case HOLIDAY:
+                    return signalServiceHoliday;
+                    default:
+                        return null;
         }
     }
 }
