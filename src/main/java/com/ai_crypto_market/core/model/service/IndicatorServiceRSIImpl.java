@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("IndicatorrsiService")
-public class IndicatorRSIServiceImpl implements IndicatorService {
+public class IndicatorServiceRSIImpl implements IndicatorService {
     public IndicatorRSI getCurrentSignal(Stock stock) {
         IndicatorRSI indicatorrsi = new IndicatorRSI();
         indicatorrsi.setName("RSI");

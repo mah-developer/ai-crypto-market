@@ -9,4 +9,7 @@ import java.time.LocalDateTime;
 public class AuditableEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private LocalDateTime deletedAt;
 }

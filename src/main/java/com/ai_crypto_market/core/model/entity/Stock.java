@@ -19,10 +19,8 @@ public class Stock extends AuditableEntity {
     private String symbol; // Example: BTC/USDT
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> trades;
+    private List<Signal> signals;
 
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Strategy> strategies;
 
     // GETTERS AND SETTERS
 
@@ -53,21 +51,13 @@ public class Stock extends AuditableEntity {
         return this;
     }
 
-    public List<Order> getTrades() {
-        return trades;
+    public List<Signal> getTrades() {
+        return signals;
     }
 
-    public Stock setTrades(List<Order> trades) {
-        this.trades = trades;
+    public Stock setTrades(List<Signal> signals) {
+        this.signals = signals;
         return this;
     }
 
-    public List<Strategy> getStrategies() {
-        return strategies;
-    }
-
-    public Stock setStrategies(List<Strategy> strategies) {
-        this.strategies = strategies;
-        return this;
-    }
 }

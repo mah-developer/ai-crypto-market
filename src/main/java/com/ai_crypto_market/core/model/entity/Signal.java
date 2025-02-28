@@ -1,15 +1,17 @@
 package com.ai_crypto_market.core.model.entity;
 
 import com.ai_crypto_market.core.model.enums.PositionType;
+import com.ai_crypto_market.core.model.enums.StrategyType;
+import com.ai_crypto_market.core.model.enums.TradeAction;
 import com.ai_crypto_market.core.model.enums.TradeStatus;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_ORDER")
-public class Order extends AuditableEntity {
+@Table(name = "TB_TRADE")
+public class Signal extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_TB_ORDER")
+    @Column(name = "PK_TB_TRADE")
     private Long id;
 
     @ManyToOne
@@ -27,20 +29,26 @@ public class Order extends AuditableEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PositionType positionType; // BUY, SELL, SHORT, LONG
+    private PositionType positionType; // BUY, SELL
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TradeStatus status = TradeStatus.PENDING;
+    private Double leverage;
+
+    private StrategyType type;
+
+    private Double buyPercent;
+
+    private Double sellPercent;
+
+    private TradeAction tradeAction;
 
     // GETTERS AND SETTERS
-
 
     public Long getId() {
         return id;
     }
 
-    public Order setId(Long id) {
+    public Signal setId(Long id) {
         this.id = id;
         return this;
     }
@@ -49,7 +57,7 @@ public class Order extends AuditableEntity {
         return stock;
     }
 
-    public Order setStock(Stock stock) {
+    public Signal setStock(Stock stock) {
         this.stock = stock;
         return this;
     }
@@ -58,7 +66,7 @@ public class Order extends AuditableEntity {
         return stopLoss;
     }
 
-    public Order setStopLoss(Double stopLoss) {
+    public Signal setStopLoss(Double stopLoss) {
         this.stopLoss = stopLoss;
         return this;
     }
@@ -67,7 +75,7 @@ public class Order extends AuditableEntity {
         return targetPrice;
     }
 
-    public Order setTargetPrice(Double targetPrice) {
+    public Signal setTargetPrice(Double targetPrice) {
         this.targetPrice = targetPrice;
         return this;
     }
@@ -76,7 +84,7 @@ public class Order extends AuditableEntity {
         return price;
     }
 
-    public Order setPrice(Double price) {
+    public Signal setPrice(Double price) {
         this.price = price;
         return this;
     }
@@ -85,17 +93,17 @@ public class Order extends AuditableEntity {
         return positionType;
     }
 
-    public Order setPositionType(PositionType positionType) {
+    public Signal setPositionType(PositionType positionType) {
         this.positionType = positionType;
         return this;
     }
 
-    public TradeStatus getStatus() {
-        return status;
+    public Double getLeverage() {
+        return leverage;
     }
 
-    public Order setStatus(TradeStatus status) {
-        this.status = status;
+    public Signal setLeverage(Double leverage) {
+        this.leverage = leverage;
         return this;
     }
 }

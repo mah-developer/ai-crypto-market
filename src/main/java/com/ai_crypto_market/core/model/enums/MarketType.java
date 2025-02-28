@@ -1,6 +1,5 @@
 package com.ai_crypto_market.core.model.enums;
 
-public enum PositionType {
-    BUY,
-    SELL
+public enum MarketType {
+    FX, CRYPTO;
 }

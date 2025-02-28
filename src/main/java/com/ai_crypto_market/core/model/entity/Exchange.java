@@ -1,5 +1,6 @@
 package com.ai_crypto_market.core.model.entity;
 
+import com.ai_crypto_market.core.model.enums.MarketType;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,15 +22,14 @@ public class Exchange extends AuditableEntity {
     @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Wallet> wallets;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MarketType marketType;
+
     // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
-    }
-
-    public Exchange setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getName() {
@@ -56,6 +56,15 @@ public class Exchange extends AuditableEntity {
 
     public Exchange setWallets(List<Wallet> wallets) {
         this.wallets = wallets;
+        return this;
+    }
+
+    public MarketType getExchangeType() {
+        return marketType;
+    }
+
+    public Exchange setExchangeType(MarketType marketType) {
+        this.marketType = marketType;
         return this;
     }
 }

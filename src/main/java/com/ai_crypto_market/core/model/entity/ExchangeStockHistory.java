@@ -5,16 +5,16 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TB_STOCK_HISTORY")
-public class StockHistory extends AuditableEntity {
+@Table(name = "TB_EXCHANGE_STOCK_HISTORY")
+public class ExchangeStockHistory extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PK_TB_STOCK_HISTORY")
+    @Column(name = "PK_TB_EXCHANGE_STOCK_HISTORY")
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "FK_TB_STOCK", nullable = false)
-    private Stock stock;
+    @JoinColumn(name = "FK_TB_EXCHANGE_STOCK", nullable = false)
+    private ExchangeStock exchangeStock;
 
     @Column(nullable = false)
     private Double openPrice;
@@ -29,25 +29,21 @@ public class StockHistory extends AuditableEntity {
     private Double low;
 
     @Column(nullable = false)
-    private LocalDateTime time;
+    private Double volume;
 
     // GETTERS AND SETTERS
+
 
     public long getId() {
         return id;
     }
 
-    public StockHistory setId(long id) {
-        this.id = id;
-        return this;
+    public ExchangeStock getExchangeStock() {
+        return exchangeStock;
     }
 
-    public Stock getStock() {
-        return stock;
-    }
-
-    public StockHistory setStock(Stock stock) {
-        this.stock = stock;
+    public ExchangeStockHistory setExchangeStock(ExchangeStock exchangeStock) {
+        this.exchangeStock = exchangeStock;
         return this;
     }
 
@@ -55,7 +51,7 @@ public class StockHistory extends AuditableEntity {
         return openPrice;
     }
 
-    public StockHistory setOpenPrice(Double openPrice) {
+    public ExchangeStockHistory setOpenPrice(Double openPrice) {
         this.openPrice = openPrice;
         return this;
     }
@@ -64,7 +60,7 @@ public class StockHistory extends AuditableEntity {
         return closePrice;
     }
 
-    public StockHistory setClosePrice(Double closePrice) {
+    public ExchangeStockHistory setClosePrice(Double closePrice) {
         this.closePrice = closePrice;
         return this;
     }
@@ -73,7 +69,7 @@ public class StockHistory extends AuditableEntity {
         return high;
     }
 
-    public StockHistory setHigh(Double high) {
+    public ExchangeStockHistory setHigh(Double high) {
         this.high = high;
         return this;
     }
@@ -82,17 +78,17 @@ public class StockHistory extends AuditableEntity {
         return low;
     }
 
-    public StockHistory setLow(Double low) {
+    public ExchangeStockHistory setLow(Double low) {
         this.low = low;
         return this;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public Double getVolume() {
+        return volume;
     }
 
-    public StockHistory setTime(LocalDateTime time) {
-        this.time = time;
+    public ExchangeStockHistory setVolume(Double volume) {
+        this.volume = volume;
         return this;
     }
 }
