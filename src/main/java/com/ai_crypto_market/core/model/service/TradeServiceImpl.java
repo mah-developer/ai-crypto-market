@@ -3,7 +3,7 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.Stock;
 import com.ai_crypto_market.core.model.entity.Signal;
 import com.ai_crypto_market.core.model.entity.User;
-import com.ai_crypto_market.core.model.enums.StrategyType;
+import com.ai_crypto_market.core.model.enums.SignalType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class TradeServiceImpl implements TradeService {
 
 
     // Do Trade For specific Users
-    public Signal doTrade(StrategyType strategyType, Stock stock, List<User> user) {
+    public Signal doTrade(SignalType strategyType, Stock stock, List<User> user) {
         SignalService signalService = strategyFactory(strategyType);
 
         Signal signal = new Signal();
@@ -34,7 +34,7 @@ public class TradeServiceImpl implements TradeService {
     }
 
     // Do Trade For All Users
-    public Signal doTrade(StrategyType strategyType, Stock stock) {
+    public Signal doTrade(SignalType strategyType, Stock stock) {
         SignalService signalService = strategyFactory(strategyType);
 
         Signal signal = new Signal();
@@ -44,7 +44,7 @@ public class TradeServiceImpl implements TradeService {
     }
 
 
-    private SignalService strategyFactory(StrategyType strategyType) {
+    private SignalService strategyFactory(SignalType strategyType) {
         switch (strategyType) {
             case FIBONACCI:
                 return signalServiceFibonacci;

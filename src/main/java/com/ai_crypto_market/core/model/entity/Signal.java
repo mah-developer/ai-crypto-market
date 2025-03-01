@@ -1,9 +1,7 @@
 package com.ai_crypto_market.core.model.entity;
 
-import com.ai_crypto_market.core.model.enums.PositionType;
-import com.ai_crypto_market.core.model.enums.StrategyType;
+import com.ai_crypto_market.core.model.enums.SignalType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
-import com.ai_crypto_market.core.model.enums.TradeStatus;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,81 +27,98 @@ public class Signal extends AuditableEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PositionType positionType; // BUY, SELL
+    private TradeAction tradeAction;
 
     @Column(nullable = false)
     private Double leverage;
 
-    private StrategyType type;
+    private SignalType type;
 
     private Double buyPercent;
 
     private Double sellPercent;
 
-    private TradeAction tradeAction;
 
     // GETTERS AND SETTERS
+
 
     public Long getId() {
         return id;
     }
 
-    public Signal setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public Stock getStock() {
         return stock;
     }
 
-    public Signal setStock(Stock stock) {
+    public void setStock(Stock stock) {
         this.stock = stock;
-        return this;
     }
 
     public Double getStopLoss() {
         return stopLoss;
     }
 
-    public Signal setStopLoss(Double stopLoss) {
+    public void setStopLoss(Double stopLoss) {
         this.stopLoss = stopLoss;
-        return this;
     }
 
     public Double getTargetPrice() {
         return targetPrice;
     }
 
-    public Signal setTargetPrice(Double targetPrice) {
+    public void setTargetPrice(Double targetPrice) {
         this.targetPrice = targetPrice;
-        return this;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public Signal setPrice(Double price) {
+    public void setPrice(Double price) {
         this.price = price;
-        return this;
     }
 
-    public PositionType getPositionType() {
-        return positionType;
+    public TradeAction getTradeAction() {
+        return tradeAction;
     }
 
-    public Signal setPositionType(PositionType positionType) {
-        this.positionType = positionType;
-        return this;
+    public void setTradeAction(TradeAction tradeAction) {
+        this.tradeAction = tradeAction;
     }
 
     public Double getLeverage() {
         return leverage;
     }
 
-    public Signal setLeverage(Double leverage) {
+    public void setLeverage(Double leverage) {
         this.leverage = leverage;
-        return this;
+    }
+
+    public SignalType getType() {
+        return type;
+    }
+
+    public void setType(SignalType type) {
+        this.type = type;
+    }
+
+    public Double getBuyPercent() {
+        return buyPercent;
+    }
+
+    public void setBuyPercent(Double buyPercent) {
+        this.buyPercent = buyPercent;
+    }
+
+    public Double getSellPercent() {
+        return sellPercent;
+    }
+
+    public void setSellPercent(Double sellPercent) {
+        this.sellPercent = sellPercent;
     }
 }
