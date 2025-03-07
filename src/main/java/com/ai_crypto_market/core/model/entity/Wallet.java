@@ -2,6 +2,9 @@ package com.ai_crypto_market.core.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "TB_WALLET")
@@ -13,7 +16,7 @@ public class Wallet extends AuditableEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "FK_TB_USERS", nullable = false)
+    @JoinColumn(name = "FK_TB_USER", nullable = false)
     private User user;
 
     @ManyToOne
@@ -28,15 +31,13 @@ public class Wallet extends AuditableEntity {
     @Column(nullable = false)
     private Double usdBalance;
 
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WalletSettings> walletSettings = new HashSet<>();
+
     // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
-    }
-
-    public Wallet setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getName() {
@@ -90,6 +91,15 @@ public class Wallet extends AuditableEntity {
 
     public Wallet setUsdBalance(Double usdBalance) {
         this.usdBalance = usdBalance;
+        return this;
+    }
+
+    public Set<WalletSettings> getWalletSettings() {
+        return walletSettings;
+    }
+
+    public Wallet setWalletSettings(Set<WalletSettings> walletSettings) {
+        this.walletSettings = walletSettings;
         return this;
     }
 }

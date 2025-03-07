@@ -24,7 +24,7 @@ public class News extends AuditableEntity {
 
     private String author;
     private String tags;
-    private String effects;
+    private String effects;// it is the real output effect on market
 
     // GETTERS AND SETTERS
 

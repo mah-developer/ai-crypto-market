@@ -2,7 +2,9 @@ package com.ai_crypto_market.core.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_STOCK")
@@ -19,18 +21,15 @@ public class Stock extends AuditableEntity {
     private String symbol; // Example: BTC/USDT
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Signal> signals;
+    private Set<Signal> signals = new HashSet<>();
 
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ExchangeStock> exchangeStocks = new HashSet<>();
 
     // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
-    }
-
-    public Stock setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getName() {
@@ -51,13 +50,21 @@ public class Stock extends AuditableEntity {
         return this;
     }
 
-    public List<Signal> getTrades() {
+    public Set<Signal> getSignals() {
         return signals;
     }
 
-    public Stock setTrades(List<Signal> signals) {
+    public Stock setSignals(Set<Signal> signals) {
         this.signals = signals;
         return this;
     }
 
+    public Set<ExchangeStock> getExchangeStocks() {
+        return exchangeStocks;
+    }
+
+    public Stock setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
+        this.exchangeStocks = exchangeStocks;
+        return this;
+    }
 }

@@ -31,11 +31,6 @@ public class WalletSettings extends AuditableEntity {
         return id;
     }
 
-    public WalletSettings setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
     public Double getMaxLeverage() {
         return maxLeverage;
     }

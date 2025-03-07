@@ -3,7 +3,8 @@ package com.ai_crypto_market.core.model.entity;
 import com.ai_crypto_market.core.model.enums.MarketType;
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_EXCHANGE")
@@ -20,11 +21,14 @@ public class Exchange extends AuditableEntity {
     private String apiUrl;
 
     @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Wallet> wallets;
+    private Set<Wallet> wallets = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private MarketType marketType;
+
+    @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ExchangeStock> exchangeStocks = new HashSet<>();
 
     // GETTERS AND SETTERS
 
@@ -50,11 +54,11 @@ public class Exchange extends AuditableEntity {
         return this;
     }
 
-    public List<Wallet> getWallets() {
+    public Set<Wallet> getWallets() {
         return wallets;
     }
 
-    public Exchange setWallets(List<Wallet> wallets) {
+    public Exchange setWallets(Set<Wallet> wallets) {
         this.wallets = wallets;
         return this;
     }
@@ -65,6 +69,24 @@ public class Exchange extends AuditableEntity {
 
     public Exchange setExchangeType(MarketType marketType) {
         this.marketType = marketType;
+        return this;
+    }
+
+    public MarketType getMarketType() {
+        return marketType;
+    }
+
+    public Exchange setMarketType(MarketType marketType) {
+        this.marketType = marketType;
+        return this;
+    }
+
+    public Set<ExchangeStock> getExchangeStocks() {
+        return exchangeStocks;
+    }
+
+    public Exchange setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
+        this.exchangeStocks = exchangeStocks;
         return this;
     }
 }
