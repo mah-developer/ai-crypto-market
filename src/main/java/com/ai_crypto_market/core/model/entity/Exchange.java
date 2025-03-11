@@ -7,17 +7,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "TB_EXCHANGE")
+@Table(name = "EXCHANGE", indexes = {
+    @Index(name = "idx_name", columnList = "name"),
+    @Index(name = "idx_api_url", columnList = "api_url")
+})
 public class Exchange extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_EXCHANGE")
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String apiUrl;
 
     @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

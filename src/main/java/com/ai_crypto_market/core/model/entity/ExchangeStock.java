@@ -3,28 +3,34 @@ package com.ai_crypto_market.core.model.entity;
 import com.ai_crypto_market.core.model.enums.ChangeType;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "TB_EXCHANGE_STOCK")
+@Table(name = "TB_EXCHANGE_STOCK", indexes = {
+    @Index(name = "idx_exchange_stock", columnList = "exchange_id, stock_id")
+})
 public class ExchangeStock extends AuditableEntity {
     @EmbeddedId
     private ExchangeStockId id = new ExchangeStockId();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("exchangeId")
     @JoinColumn(name = "exchange_id", nullable = false)
     private Exchange exchange;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("stockId")
     @JoinColumn(name = "stock_id", nullable = false)
     private Stock stock;
 
     @OneToMany(mappedBy = "exchangeStock", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExchangeStockHistory> history;
+    private List<ExchangeStockHistory> history = new ArrayList<>();
 
-    private Double lot;
+    @Column(nullable = false, precision = 15, scale = 2)
+    private BigDecimal lot;
+
 
     public ExchangeStock() {}
 
@@ -55,4 +61,43 @@ public class ExchangeStock extends AuditableEntity {
 //    }
 
 
+    public ExchangeStockId getId() {
+        return id;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public ExchangeStock setExchange(Exchange exchange) {
+        this.exchange = exchange;
+        return this;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public ExchangeStock setStock(Stock stock) {
+        this.stock = stock;
+        return this;
+    }
+
+    public List<ExchangeStockHistory> getHistory() {
+        return history;
+    }
+
+    public ExchangeStock setHistory(List<ExchangeStockHistory> history) {
+        this.history = history;
+        return this;
+    }
+
+    public BigDecimal getLot() {
+        return lot;
+    }
+
+    public ExchangeStock setLot(BigDecimal lot) {
+        this.lot = lot;
+        return this;
+    }
 }

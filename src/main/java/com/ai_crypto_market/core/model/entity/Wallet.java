@@ -2,25 +2,30 @@ package com.ai_crypto_market.core.model.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
-@Table(name = "TB_WALLET")
+@Table(name = "TB_WALLET", indexes = {
+    @Index(name = "idx_fk_user", columnList = "FK_USER"),
+    @Index(name = "idx_fk_exchange", columnList = "FK_EXCHANGE")
+})
 public class Wallet extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_WALLET")
     private Long id;
+    @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_TB_USER", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_USER", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_TB_EXCHANGE", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_EXCHANGE", nullable = false)
     private Exchange exchange;
 
     @Column(nullable = false, unique = true)
@@ -28,11 +33,11 @@ public class Wallet extends AuditableEntity {
     @Column(nullable = false)
     private String encryptedPrivateKey; // Store securely
 
-    @Column(nullable = false)
-    private Double usdBalance;
+    @Column(nullable = false, precision = 15, scale = 2)
+    private BigDecimal usdBalance;
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<WalletSettings> walletSettings = new HashSet<>();
+  private Set<WalletSettings> walletSettings = new HashSet<>();
 
     // GETTERS AND SETTERS
 
@@ -85,11 +90,12 @@ public class Wallet extends AuditableEntity {
         return this;
     }
 
-    public Double getUsdBalance() {
+
+    public BigDecimal getUsdBalance() {
         return usdBalance;
     }
 
-    public Wallet setUsdBalance(Double usdBalance) {
+    public Wallet setUsdBalance(BigDecimal usdBalance) {
         this.usdBalance = usdBalance;
         return this;
     }

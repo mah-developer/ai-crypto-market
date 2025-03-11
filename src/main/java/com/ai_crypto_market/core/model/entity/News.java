@@ -1,29 +1,34 @@
 package com.ai_crypto_market.core.model.entity;
 
+import com.ai_crypto_market.core.model.enums.NewsImpact;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_NEWS")
 public class News extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_NEWS")
     private Long id;
-
-    @Column(nullable = false)
-    private String source;
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
+    private LocalDateTime publishTime;
+    @Column(nullable = false)
+    private String source;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private NewsImpact impact;
+
+    @Column(length = 1000)
     private String description;
 
-    @Column(nullable = false)
-    private Double sentimentScore; // AI-driven sentiment analysis
-
-    private String author;
-    private String tags;
     private String effects;// it is the real output effect on market
 
     // GETTERS AND SETTERS
@@ -32,8 +37,21 @@ public class News extends AuditableEntity {
         return id;
     }
 
-    public News setId(Long id) {
-        this.id = id;
+    public String getTitle() {
+        return title;
+    }
+
+    public News setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public LocalDateTime getPublishTime() {
+        return publishTime;
+    }
+
+    public News setPublishTime(LocalDateTime publishTime) {
+        this.publishTime = publishTime;
         return this;
     }
 
@@ -46,12 +64,12 @@ public class News extends AuditableEntity {
         return this;
     }
 
-    public String getTitle() {
-        return title;
+    public NewsImpact getImpact() {
+        return impact;
     }
 
-    public News setTitle(String title) {
-        this.title = title;
+    public News setImpact(NewsImpact impact) {
+        this.impact = impact;
         return this;
     }
 
@@ -61,33 +79,6 @@ public class News extends AuditableEntity {
 
     public News setDescription(String description) {
         this.description = description;
-        return this;
-    }
-
-    public Double getSentimentScore() {
-        return sentimentScore;
-    }
-
-    public News setSentimentScore(Double sentimentScore) {
-        this.sentimentScore = sentimentScore;
-        return this;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public News setAuthor(String author) {
-        this.author = author;
-        return this;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
-    public News setTags(String tags) {
-        this.tags = tags;
         return this;
     }
 

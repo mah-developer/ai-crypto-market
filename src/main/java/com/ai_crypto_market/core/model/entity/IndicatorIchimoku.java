@@ -6,26 +6,37 @@ import jakarta.persistence.*;
 @Table(name = "TB_INDICATOR_ICHIMOKU")
 public class IndicatorIchimoku extends Indicator {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_INDICATOR_ICHIMOKU")
     private Long id;
+    @Column(nullable = false)
     private float conversionLine;
+    @Column(nullable = false)
     private float baseLine;
+    @Column(nullable = false)
     private float loggingSpan;
+    @Column(nullable = false)
     private float leadingSpanA;
+    @Column(nullable = false)
     private float leadingSpanB;
+    @Column(nullable = false)
     private float kumoUpper;
+    @Column(nullable = false)
     private float kumoLower;
 
+    /*
+    * todo: check this relation
+    * @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "exchange_id", referencedColumnName = "exchange_id", nullable = false),
+        @JoinColumn(name = "stock_id", referencedColumnName = "stock_id", nullable = false)
+    })
+    private ExchangeStock exchangeStock;
+    * */
     // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
-    }
-
-    public IndicatorIchimoku setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public float getConversionLine() {

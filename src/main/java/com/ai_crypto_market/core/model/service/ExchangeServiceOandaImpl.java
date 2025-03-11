@@ -12,9 +12,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
+// forex exchange (e.g., OANDA)
 @Service
-@Qualifier("ExchangeBinanceService")
-public class ExchangeServiceBinanceImpl implements ExchangeService {
+@Qualifier("ExchangeOandaService")
+public class ExchangeServiceOandaImpl implements ExchangeService {
     String API_KEY="";
     String API_SECRET="";
 
@@ -29,19 +30,18 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
 
     @Override
     public String OpenPosition(Signal signal) {
-        signal.getStock().getExchangeStocks().stream().forEach(exchangeStock -> {
-            exchangeStock.getExchange().getWallets().stream().forEach(wallet -> {
-                // todo call binance api
-            });
-        });
+        LinkedHashMap<String,Object> parameters = new LinkedHashMap<String,Object>();
+        UMFuturesClientImpl client = new UMFuturesClientImpl(API_KEY, API_SECRET);
 
-        for (ExchangeStock exchangeStock : signal.getStock().getExchangeStocks()) {
-            for (Wallet wallet : exchangeStock.getExchange().getWallets()) {
-                // todo call binance api
-            }
-        }
+        parameters.put("symbol","BTCUSDT");
+        parameters.put("side", "SELL");
+        parameters.put("type", "LIMIT");
+        parameters.put("timeInForce", "GTC");
+        parameters.put("quantity", 0.01);
+        parameters.put("price", 9500);
 
-        return "";
+        String result = client.account().newOrder(parameters);
+        return result;
     }
 
     @Override

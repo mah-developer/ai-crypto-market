@@ -3,21 +3,23 @@ package com.ai_crypto_market.core.model.entity;
 import com.ai_crypto_market.core.model.enums.UserRole;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "TB_USER")
+@Table(name = "TB_USER", indexes = {@Index(name = "idx_email", columnList = "email")})
 public class User extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_USER")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 255)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String passwordHash;
 
     @Enumerated(EnumType.STRING)
@@ -25,7 +27,7 @@ public class User extends AuditableEntity {
     private UserRole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Wallet> wallets = new HashSet<>();;
+    private List<Wallet> wallets = new ArrayList<>();
 
     // GETTERS AND SETTERS
 
@@ -60,11 +62,11 @@ public class User extends AuditableEntity {
         return this;
     }
 
-    public Set<Wallet> getWallets() {
+    public List<Wallet> getWallets() {
         return wallets;
     }
 
-    public User setWallets(Set<Wallet> wallets) {
+    public User setWallets(List<Wallet> wallets) {
         this.wallets = wallets;
         return this;
     }

@@ -1,9 +1,6 @@
 package com.ai_crypto_market.core.model.service;
 
-import com.ai_crypto_market.core.model.entity.Indicator;
-import com.ai_crypto_market.core.model.entity.IndicatorIchimoku;
-import com.ai_crypto_market.core.model.entity.IndicatorRSI;
-import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,11 +17,11 @@ public class TradeDeciderService {
     private IndicatorService ichimokuIndicatorService;
 
     @Autowired
-    @Qualifier("ExchangebingxService")
+    @Qualifier("ExchangeBingXService")
     private ExchangeService bingXExchangeService;
 
     @Autowired
-    @Qualifier("ExchangebinanceService")
+    @Qualifier("ExchangeBinanceService")
     private ExchangeService binanceExchangeService;
 
     public String doTrade(Stock stock) {
@@ -49,11 +46,11 @@ public class TradeDeciderService {
         // todo go to different method
         if (totalBuyPercent > totalSellPercent) {
             System.out.println("decide to buy " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(amount);
+            exchangeService.OpenPosition(new Signal());
             result = amount + " of " + stock.getName() + "bought";
         } else {
             System.out.println("decide to sell " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(amount);
+            exchangeService.OpenPosition(new Signal());
             result = amount + " of " + stock.getName() + " sold";
         }
 

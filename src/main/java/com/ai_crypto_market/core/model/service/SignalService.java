@@ -7,5 +7,8 @@ public interface SignalService {
 
 //    Strategy analyze(Stock stock);
     Signal analyze(Stock stock);
+    Signal analyze(String stock);
     Signal updatesignal(Stock stock);
+
+    void updateSignal(Signal signal);
 }

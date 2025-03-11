@@ -10,11 +10,11 @@ import java.util.Set;
 @Table(name = "TB_STOCK")
 public class Stock extends AuditableEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_STOCK")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name; // Example: Bitcoin
 
     @Column(nullable = false, unique = true)

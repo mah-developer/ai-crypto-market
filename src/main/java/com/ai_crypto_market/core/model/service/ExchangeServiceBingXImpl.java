@@ -1,12 +1,17 @@
 package com.ai_crypto_market.core.model.service;
 
+import com.ai_crypto_market.core.model.entity.ExchangeStock;
+import com.ai_crypto_market.core.model.entity.MarketData;
+import com.ai_crypto_market.core.model.entity.Signal;
+import com.ai_crypto_market.core.model.entity.Wallet;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @Service
-@Qualifier("ExchangebingxService")
+@Qualifier("ExchangeBingXService")
 public class ExchangeServiceBingXImpl implements ExchangeService {
 
     @Override
@@ -18,7 +23,7 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
 
 
     @Override
-    public String OpenPosition(Long amount) {
+    public String OpenPosition(Signal signal) {
         return "";
     }
 
@@ -36,6 +41,21 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
         System.out.println(response);
         return response;
     }
-    
-    
+
+    @Override
+    public String openPosition(Wallet wallet, Signal signal) {
+        return "";
+    }
+
+    @Override
+    public List<ExchangeStock> getAllExchangeStocks() {
+        return List.of();
+    }
+
+    @Override
+    public MarketData fetchMarketData(ExchangeStock exchangeStock) {
+        return null;
+    }
+
+
 }

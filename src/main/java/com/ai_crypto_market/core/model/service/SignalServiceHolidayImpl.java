@@ -15,8 +15,18 @@ public class SignalServiceHolidayImpl implements SignalService {
     }
 
     @Override
+    public Signal analyze(String stock) {
+        return null;
+    }
+
+    @Override
     public Signal updatesignal(Stock stock) {
         return null;
+    }
+
+    @Override
+    public void updateSignal(Signal signal) {
+
     }
 
 //    @Override

@@ -4,5 +4,7 @@ public enum TradeStatus {
     PENDING,
     FILLED,
     CANCELLED,
-    SIGNALONLY
+    SIGNALONLY,
+    OPEN
+
 }
