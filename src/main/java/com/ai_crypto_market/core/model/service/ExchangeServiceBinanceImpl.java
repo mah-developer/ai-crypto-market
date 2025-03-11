@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -32,14 +33,25 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
         signal.getStock().getExchangeStocks().stream().forEach(exchangeStock -> {
             exchangeStock.getExchange().getWallets().stream().forEach(wallet -> {
                 // todo call binance api
+                // wallet
+                UMFuturesClientImpl client = new UMFuturesClientImpl(wallet.getApiKey(),wallet.getApiSecret());
+                LinkedHashMap<String,Object> parameters = new LinkedHashMap<String,Object>();
+                parameters.put("symbol",signal.getStock().getSymbol());
+                parameters.put("side", signal.getPositionType());
+                parameters.put("type", signal.getOrderType());
+                parameters.put("timeInForce", "GTC");
+                parameters.put("quantity", signal.getQuantity());
+                parameters.put("price", signal.getEntryPrice());
+
+                String result = client.account().newOrder(parameters);
             });
         });
 
-        for (ExchangeStock exchangeStock : signal.getStock().getExchangeStocks()) {
-            for (Wallet wallet : exchangeStock.getExchange().getWallets()) {
-                // todo call binance api
-            }
-        }
+//        for (ExchangeStock exchangeStock : signal.getStock().getExchangeStocks()) {
+//            for (Wallet wallet : exchangeStock.getExchange().getWallets()) {
+//                // todo call binance api
+//            }
+//        }
 
         return "";
     }

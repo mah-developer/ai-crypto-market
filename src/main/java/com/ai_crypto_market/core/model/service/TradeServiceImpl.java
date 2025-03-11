@@ -37,6 +37,8 @@ public class TradeServiceImpl implements TradeService {
     @Autowired
     @Qualifier("ExchangeBingXService")
     private ExchangeService exchangeService;
+    @Autowired
+    private ExchangeServiceBinanceImpl exchangeBinanceService;
 
     public Signal doTrade(Wallet wallet, String marketFlow, SignalType signalType) {
         SignalService signalService = signalFactory(signalType);
@@ -53,6 +55,10 @@ public class TradeServiceImpl implements TradeService {
         signal.setQuantity(calculateQuantity(wallet, signal));
         signal.setStatus(TradeStatus.OPEN);
         signal.setEntryTime(LocalDateTime.now());
+
+
+        // stock, price, tp, wallet, stop, leverage, orderType (Market, Limit), positionType (Long, Short/ Buy, Sell)
+//        exchangeBinanceService.openPosition()
         return signalRepository.save(signal);
     }
 

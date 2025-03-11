@@ -1,8 +1,6 @@
 package com.ai_crypto_market.core.model.entity;
 
-import com.ai_crypto_market.core.model.enums.SignalType;
-import com.ai_crypto_market.core.model.enums.TradeAction;
-import com.ai_crypto_market.core.model.enums.TradeStatus;
+import com.ai_crypto_market.core.model.enums.*;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -66,6 +64,14 @@ public class Signal extends AuditableEntity {
 
     @Column
     private LocalDateTime exitTime; // Added for trade
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private PositionType positionType;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private OrderType orderType;
 
     // GETTERS AND SETTERS
 
@@ -206,5 +212,21 @@ public class Signal extends AuditableEntity {
     public Signal setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
         return this;
+    }
+
+    public PositionType getPositionType() {
+        return positionType;
+    }
+
+    public void setPositionType(PositionType positionType) {
+        this.positionType = positionType;
+    }
+
+    public OrderType getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(OrderType orderType) {
+        this.orderType = orderType;
     }
 }
