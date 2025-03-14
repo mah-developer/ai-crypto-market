@@ -3,7 +3,6 @@ package com.ai_crypto_market.core.model.entity;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,9 +18,30 @@ public class Stock extends AuditableEntity {
 
     @Column(nullable = false, unique = true)
     private String symbol; // Example: BTC/USDT
+/// //////////////////////////////////////////////
+/// NEW PROPERTIES
+    @Transient
+    private String rsi; // last 5 items based on timeFrame
+    @Transient
+    private String ma7;
+    @Transient
+    private String ma14;
+    @Transient
+    private String ma21;
+    @Transient
+    private String volume; // last 5 items based on timeFrame
+    @Transient
+    private String candle; // last 5 items based on timeFrame
+    @Transient
+    private int priceAction;
+    @Transient
+    private int aiNews;
+    @Transient
+    private int smartMoney;
+    /// //////////////////////////////////////////////
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Signal> signals = new HashSet<>();
+    private Set<Strategy> strategies = new HashSet<>();
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ExchangeStock> exchangeStocks = new HashSet<>();
@@ -50,12 +70,12 @@ public class Stock extends AuditableEntity {
         return this;
     }
 
-    public Set<Signal> getSignals() {
-        return signals;
+    public Set<Strategy> getSignals() {
+        return strategies;
     }
 
-    public Stock setSignals(Set<Signal> signals) {
-        this.signals = signals;
+    public Stock setSignals(Set<Strategy> strategies) {
+        this.strategies = strategies;
         return this;
     }
 
@@ -65,6 +85,87 @@ public class Stock extends AuditableEntity {
 
     public Stock setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
         this.exchangeStocks = exchangeStocks;
+        return this;
+    }
+
+    public String getRsi() {
+        return rsi;
+    }
+
+    public Stock setRsi(String rsi) {
+        this.rsi = rsi;
+        return this;
+    }
+
+    public String getMa7() {
+        return ma7;
+    }
+
+    public Stock setMa7(String ma7) {
+        this.ma7 = ma7;
+        return this;
+    }
+
+    public String getMa14() {
+        return ma14;
+    }
+
+    public Stock setMa14(String ma14) {
+        this.ma14 = ma14;
+        return this;
+    }
+
+    public String getMa21() {
+        return ma21;
+    }
+
+    public Stock setMa21(String ma21) {
+        this.ma21 = ma21;
+        return this;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public Stock setVolume(String volume) {
+        this.volume = volume;
+        return this;
+    }
+
+    public String getCandle() {
+        return candle;
+    }
+
+    public Stock setCandle(String candle) {
+        this.candle = candle;
+        return this;
+    }
+
+    public int getPriceAction() {
+        return priceAction;
+    }
+
+    public Stock setPriceAction(int priceAction) {
+        this.priceAction = priceAction;
+        return this;
+    }
+
+    public int getAiNews() {
+        return aiNews;
+    }
+
+    public Stock setAiNews(int aiNews) {
+        this.aiNews = aiNews;
+        return this;
+    }
+
+    public int getSmartMoney() {
+        return smartMoney;
+    }
+
+    public Stock setSmartMoney(int smartMoney) {
+        this.smartMoney = smartMoney;
         return this;
     }
 }

@@ -3,7 +3,6 @@ package com.ai_crypto_market.core.model.entity;
 import com.ai_crypto_market.core.model.enums.NewsImpact;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity

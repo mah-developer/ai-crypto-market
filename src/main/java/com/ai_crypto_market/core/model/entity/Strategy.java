@@ -1,8 +1,8 @@
 package com.ai_crypto_market.core.model.entity;
 
-import com.ai_crypto_market.core.model.enums.SignalType;
+import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
-import com.ai_crypto_market.core.model.enums.TradeStatus;
+import com.ai_crypto_market.core.model.enums.PositionStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_TRADE")
-public class Signal extends AuditableEntity {
+public class Strategy extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_TRADE")
@@ -40,7 +40,7 @@ public class Signal extends AuditableEntity {
     private BigDecimal leverage;
 
     @Enumerated(EnumType.STRING)
-    private SignalType type;
+    private StrategyType type;
 
     @Column(precision = 5, scale = 2)
     private BigDecimal buyPercent;
@@ -59,7 +59,7 @@ public class Signal extends AuditableEntity {
     private BigDecimal quantity; // Added for trade
 
     @Enumerated(EnumType.STRING)
-    private TradeStatus status; // Added for trade (e.g., PENDING, OPEN, CLOSED)
+    private PositionStatus status; // Added for trade (e.g., PENDING, OPEN, CLOSED)
 
     @Column
     private LocalDateTime entryTime; // Added for trade
@@ -121,11 +121,11 @@ public class Signal extends AuditableEntity {
         this.leverage = leverage;
     }
 
-    public SignalType getType() {
+    public StrategyType getType() {
         return type;
     }
 
-    public void setType(SignalType type) {
+    public void setType(StrategyType type) {
         this.type = type;
     }
 
@@ -149,7 +149,7 @@ public class Signal extends AuditableEntity {
         return positionId;
     }
 
-    public Signal setPositionId(String positionId) {
+    public Strategy setPositionId(String positionId) {
         this.positionId = positionId;
         return this;
     }
@@ -158,7 +158,7 @@ public class Signal extends AuditableEntity {
         return exitPrice;
     }
 
-    public Signal setExitPrice(BigDecimal exitPrice) {
+    public Strategy setExitPrice(BigDecimal exitPrice) {
         this.exitPrice = exitPrice;
         return this;
     }
@@ -167,7 +167,7 @@ public class Signal extends AuditableEntity {
         return wallet;
     }
 
-    public Signal setWallet(Wallet wallet) {
+    public Strategy setWallet(Wallet wallet) {
         this.wallet = wallet;
         return this;
     }
@@ -176,16 +176,16 @@ public class Signal extends AuditableEntity {
         return quantity;
     }
 
-    public Signal setQuantity(BigDecimal quantity) {
+    public Strategy setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
         return this;
     }
 
-    public TradeStatus getStatus() {
+    public PositionStatus getStatus() {
         return status;
     }
 
-    public Signal setStatus(TradeStatus status) {
+    public Strategy setStatus(PositionStatus status) {
         this.status = status;
         return this;
     }
@@ -194,7 +194,7 @@ public class Signal extends AuditableEntity {
         return entryTime;
     }
 
-    public Signal setEntryTime(LocalDateTime entryTime) {
+    public Strategy setEntryTime(LocalDateTime entryTime) {
         this.entryTime = entryTime;
         return this;
     }
@@ -203,7 +203,7 @@ public class Signal extends AuditableEntity {
         return exitTime;
     }
 
-    public Signal setExitTime(LocalDateTime exitTime) {
+    public Strategy setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
         return this;
     }

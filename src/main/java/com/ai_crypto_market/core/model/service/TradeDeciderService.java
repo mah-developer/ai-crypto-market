@@ -46,11 +46,11 @@ public class TradeDeciderService {
         // todo go to different method
         if (totalBuyPercent > totalSellPercent) {
             System.out.println("decide to buy " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(new Signal());
+            exchangeService.OpenPosition(new Strategy());
             result = amount + " of " + stock.getName() + "bought";
         } else {
             System.out.println("decide to sell " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(new Signal());
+            exchangeService.OpenPosition(new Strategy());
             result = amount + " of " + stock.getName() + " sold";
         }
 

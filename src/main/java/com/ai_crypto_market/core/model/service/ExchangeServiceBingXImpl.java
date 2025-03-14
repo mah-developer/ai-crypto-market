@@ -1,13 +1,9 @@
 package com.ai_crypto_market.core.model.service;
 
-import com.ai_crypto_market.core.model.entity.ExchangeStock;
-import com.ai_crypto_market.core.model.entity.MarketData;
-import com.ai_crypto_market.core.model.entity.Signal;
-import com.ai_crypto_market.core.model.entity.Wallet;
+import com.ai_crypto_market.core.model.entity.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
@@ -23,7 +19,7 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
 
 
     @Override
-    public String OpenPosition(Signal signal) {
+    public String OpenPosition(Strategy strategy) {
         return "";
     }
 
@@ -43,7 +39,7 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
     }
 
     @Override
-    public String openPosition(Wallet wallet, Signal signal) {
+    public String openPosition(Wallet wallet, Strategy strategy) {
         return "";
     }
 
@@ -55,6 +51,43 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
     @Override
     public MarketData fetchMarketData(ExchangeStock exchangeStock) {
         return null;
+    }
+
+    @Override
+    public Position buy(Position openedPosition) {
+        return null;
+    }
+
+    @Override
+    public Position sell(Position openedPosition) {
+        return null;
+    }
+
+    @Override
+    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock) {
+        // previously filled these items: id, name, symbol
+        stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
+        stock.setMa7("20");
+        stock.setMa14("35");
+        stock.setMa21("45");
+        stock.setVolume("65,54,42,87,69"); // last 5 items based on timeFrame
+        stock.setCandle("12,22,23,24;31,32,33,34;41,42,43,44;51,52,53,54"); // last 5 items based on timeFrame
+        stock.setPriceAction(50);
+        stock.setAiNews(20);
+        stock.setSmartMoney(21);
+        return stock;
+    }
+
+    @Override
+    public Long getPriceFromExchangeServiceApi(Position openedPosition) {
+        System.out.println("get current price from exchange api ...");
+        return 10l;
+    }
+
+    @Override
+    public Long getProfitFromExchangeServiceApi(Position openPosition) {
+        System.out.println("get profit from exchange api ...");
+        return 2l;
     }
 
 
