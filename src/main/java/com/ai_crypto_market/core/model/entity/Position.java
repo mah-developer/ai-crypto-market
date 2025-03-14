@@ -7,15 +7,15 @@ public class Position {
     private Long id;
     private Strategy strategy;
     private Wallet wallet;
-    private Long currentTargetPrice;
-    private Long currentStopLoss;
-    private Long entryPrice;
-    private Long quantity;
+    private float currentTargetPrice;
+    private float currentStopLoss;
+    private float entryPrice;
+    private float quantity;
     private PositionStatus positionStatus;
     private PositionType positionType;
-    private Long profit;
+    private float profit;
     private String exchangePositionId;
-    private Long currentPrice;
+    private float currentPrice;
 
     public Long getId() {
         return id;
@@ -39,38 +39,38 @@ public class Position {
         return this;
     }
 
-    public Long getCurrentTargetPrice() {
+    public float getCurrentTargetPrice() {
         return currentTargetPrice;
     }
 
-    public Position setCurrentTargetPrice(Long currentTargetPrice) {
+    public Position setCurrentTargetPrice(float currentTargetPrice) {
         this.currentTargetPrice = currentTargetPrice;
         return this;
     }
 
-    public Long getCurrentStopLoss() {
+    public float getCurrentStopLoss() {
         return currentStopLoss;
     }
 
-    public Position setCurrentStopLoss(Long currentStopLoss) {
+    public Position setCurrentStopLoss(float currentStopLoss) {
         this.currentStopLoss = currentStopLoss;
         return this;
     }
 
-    public Long getEntryPrice() {
+    public float getEntryPrice() {
         return entryPrice;
     }
 
-    public Position setEntryPrice(Long entryPrice) {
+    public Position setEntryPrice(float entryPrice) {
         this.entryPrice = entryPrice;
         return this;
     }
 
-    public Long getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public Position setQuantity(Long quantity) {
+    public Position setQuantity(float quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -102,11 +102,11 @@ public class Position {
         return this;
     }
 
-    public Long getProfit() {
+    public float getProfit() {
         return profit;
     }
 
-    public Position setProfit(Long profit) {
+    public Position setProfit(float profit) {
         this.profit = profit;
         return this;
     }
@@ -120,11 +120,11 @@ public class Position {
         return this;
     }
 
-    public Long getCurrentPrice() {
+    public float getCurrentPrice() {
         return currentPrice;
     }
 
-    public Position setCurrentPrice(Long currentPrice) {
+    public Position setCurrentPrice(float currentPrice) {
         this.currentPrice = currentPrice;
         return this;
     }

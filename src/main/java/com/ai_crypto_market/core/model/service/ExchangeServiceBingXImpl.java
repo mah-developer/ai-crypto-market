@@ -1,9 +1,11 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
+import com.ai_crypto_market.core.model.enums.TimeFrame;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.lang.management.ThreadInfo;
 import java.util.List;
 
 @Service
@@ -12,24 +14,9 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
 
     @Override
     public String ExchangeInformation() {
-
         String result = "";
         return result;
     }
-
-
-    @Override
-    public String OpenPosition(Strategy strategy) {
-        return "";
-    }
-
-    @Override
-    public String ClosePosition(Long amount) {
-        String response = "sell executed in CoinMarketCap with this amount: " + amount;
-        System.out.println(response);
-        return response;
-    }
-
 
     @Override
     public String GetBalance(Long amount) {
@@ -37,10 +24,11 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
         System.out.println(response);
         return response;
     }
-
     @Override
-    public String openPosition(Wallet wallet, Strategy strategy) {
-        return "";
+    public String GetProfit(Long amount) {
+        String response = "long executed in binance with this amount: " + amount;
+        System.out.println(response);
+        return response;
     }
 
     @Override
@@ -54,17 +42,22 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
     }
 
     @Override
-    public Position buy(Position openedPosition) {
+    public Position openPosition(Position position) {
         return null;
     }
 
     @Override
-    public Position sell(Position openedPosition) {
+    public Position closePosition(Position position) {
         return null;
     }
 
     @Override
-    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock) {
+    public Position closeAll(Position position) {
+        return null;
+    }
+
+    @Override
+    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock, TimeFrame timeFrame) {
         // previously filled these items: id, name, symbol
         stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
         stock.setMa7("20");
@@ -79,15 +72,15 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
     }
 
     @Override
-    public Long getPriceFromExchangeServiceApi(Position openedPosition) {
+    public float getPriceFromExchangeServiceApi(Position openedPosition) {
         System.out.println("get current price from exchange api ...");
-        return 10l;
+        return 25000;
     }
 
     @Override
-    public Long getProfitFromExchangeServiceApi(Position openPosition) {
+    public float getProfitFromExchangeServiceApi(Position openPosition) {
         System.out.println("get profit from exchange api ...");
-        return 2l;
+        return 14;
     }
 
 

@@ -1,6 +1,7 @@
 package com.ai_crypto_market.core.model.entity;
 
 import com.ai_crypto_market.core.model.enums.StrategyType;
+import com.ai_crypto_market.core.model.enums.TimeFrame;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import com.ai_crypto_market.core.model.enums.PositionStatus;
 import jakarta.persistence.*;
@@ -20,33 +21,36 @@ public class Strategy extends AuditableEntity {
     @JoinColumn(name = "FK_STOCK", nullable = false)
     private Stock stock;
 
-    @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal stopLoss;
+    @Column(nullable = false)
+    private TimeFrame timeFrame;
 
     @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal targetPrice;
+    private float stopLoss;
 
     @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal entryPrice; // Entry price
+    private float targetPrice;
+
+    @Column(nullable = false, precision = 15, scale = 2)
+    private float entryPrice; // Entry price
 
     @Column(precision = 15, scale = 2)
-    private BigDecimal exitPrice; // Added for trade
+    private float exitPrice; // Added for trade
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TradeAction tradeAction;
 
     @Column(nullable = false, precision = 5, scale = 2)
-    private BigDecimal leverage;
+    private int leverage;
 
     @Enumerated(EnumType.STRING)
     private StrategyType type;
 
     @Column(precision = 5, scale = 2)
-    private BigDecimal buyPercent;
+    private float buyPercent;
 
     @Column(precision = 5, scale = 2)
-    private BigDecimal sellPercent;
+    private float sellPercent;
 
     @Column
     private String positionId; // Added for exchange position tracking
@@ -56,7 +60,7 @@ public class Strategy extends AuditableEntity {
     private Wallet wallet; // Added for trade context
 
     @Column(precision = 15, scale = 2)
-    private BigDecimal quantity; // Added for trade
+    private float quantity; // Added for trade
 
     @Enumerated(EnumType.STRING)
     private PositionStatus status; // Added for trade (e.g., PENDING, OPEN, CLOSED)
@@ -81,27 +85,25 @@ public class Strategy extends AuditableEntity {
         this.stock = stock;
     }
 
-    public BigDecimal getStopLoss() {
+    public float getStopLoss() {
         return stopLoss;
     }
 
-    public void setStopLoss(BigDecimal stopLoss) {
+    public void setStopLoss(float stopLoss) {
         this.stopLoss = stopLoss;
     }
 
-    public BigDecimal getTargetPrice() {
-        return targetPrice;
-    }
+    public float getTargetPrice() {return targetPrice;}
 
-    public void setTargetPrice(BigDecimal targetPrice) {
+    public void setTargetPrice(float targetPrice) {
         this.targetPrice = targetPrice;
     }
 
-    public BigDecimal getEntryPrice() {
+    public float getEntryPrice() {
         return entryPrice;
     }
 
-    public void setEntryPrice(BigDecimal price) {
+    public void setEntryPrice(float price) {
         this.entryPrice = price;
     }
 
@@ -113,11 +115,11 @@ public class Strategy extends AuditableEntity {
         this.tradeAction = tradeAction;
     }
 
-    public BigDecimal getLeverage() {
+    public int getLeverage() {
         return leverage;
     }
 
-    public void setLeverage(BigDecimal leverage) {
+    public void setLeverage(int leverage) {
         this.leverage = leverage;
     }
 
@@ -129,19 +131,19 @@ public class Strategy extends AuditableEntity {
         this.type = type;
     }
 
-    public BigDecimal getBuyPercent() {
+    public float getBuyPercent() {
         return buyPercent;
     }
 
-    public void setBuyPercent(BigDecimal buyPercent) {
+    public void setBuyPercent(float buyPercent) {
         this.buyPercent = buyPercent;
     }
 
-    public BigDecimal getSellPercent() {
+    public float getSellPercent() {
         return sellPercent;
     }
 
-    public void setSellPercent(BigDecimal sellPercent) {
+    public void setSellPercent(float sellPercent) {
         this.sellPercent = sellPercent;
     }
 
@@ -154,11 +156,11 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getExitPrice() {
+    public float getExitPrice() {
         return exitPrice;
     }
 
-    public Strategy setExitPrice(BigDecimal exitPrice) {
+    public Strategy setExitPrice(float exitPrice) {
         this.exitPrice = exitPrice;
         return this;
     }
@@ -172,11 +174,11 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public Strategy setQuantity(BigDecimal quantity) {
+    public Strategy setQuantity(float quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -205,6 +207,14 @@ public class Strategy extends AuditableEntity {
 
     public Strategy setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
+        return this;
+    }
+    public TimeFrame getTimeFrame() {
+        return timeFrame;
+    }
+
+    public Strategy setTimeFrame(TimeFrame timeFrame) {
+        this.timeFrame = timeFrame;
         return this;
     }
 }

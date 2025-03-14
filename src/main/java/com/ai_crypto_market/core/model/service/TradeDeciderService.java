@@ -44,15 +44,15 @@ public class TradeDeciderService {
         int totalSellPercent = 0;//((ichimokuCurrentSignal.getSellPercent() * ichimokuCurrentSignal.getAccuracy()) + (rsiCurrentSignal.getSellPercent() * rsiCurrentSignal.getAccuracy())) / 2;
 
         // todo go to different method
-        if (totalBuyPercent > totalSellPercent) {
-            System.out.println("decide to buy " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(new Strategy());
-            result = amount + " of " + stock.getName() + "bought";
-        } else {
-            System.out.println("decide to sell " + amount + " of " + stock.getName());
-            exchangeService.OpenPosition(new Strategy());
-            result = amount + " of " + stock.getName() + " sold";
-        }
+//        if (totalBuyPercent > totalSellPercent) {
+//            System.out.println("decide to buy " + amount + " of " + stock.getName());
+//            exchangeService.OpenPosition(new Strategy());
+//            result = amount + " of " + stock.getName() + "bought";
+//        } else {
+//            System.out.println("decide to sell " + amount + " of " + stock.getName());
+//            exchangeService.OpenPosition(new Strategy());
+//            result = amount + " of " + stock.getName() + " sold";
+//        }
 
         System.out.println("trade calculation finished.");
         return result;

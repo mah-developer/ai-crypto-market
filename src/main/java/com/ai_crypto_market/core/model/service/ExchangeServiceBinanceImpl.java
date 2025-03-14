@@ -1,50 +1,24 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
+import com.ai_crypto_market.core.model.enums.TimeFrame;
 import com.binance.connector.futures.client.impl.UMFuturesClientImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
 @Service
 @Qualifier("ExchangeBinanceService")
 public class ExchangeServiceBinanceImpl implements ExchangeService {
-    String API_KEY="";
-    String API_SECRET="";
-
 
     @Override
     public String ExchangeInformation() {
         UMFuturesClientImpl client = new UMFuturesClientImpl();
         String result = client.market().exchangeInfo();
         return result;
-    }
-
-
-    @Override
-    public String OpenPosition(Strategy strategy) {
-        strategy.getStock().getExchangeStocks().stream().forEach(exchangeStock -> {
-            exchangeStock.getExchange().getWallets().stream().forEach(wallet -> {
-                // todo call binance api
-            });
-        });
-
-        for (ExchangeStock exchangeStock : strategy.getStock().getExchangeStocks()) {
-            for (Wallet wallet : exchangeStock.getExchange().getWallets()) {
-                // todo call binance api
-            }
-        }
-
-        return "";
-    }
-
-    @Override
-    public String ClosePosition(Long amount) {
-        String response = "sell executed in binance with this amount: " + amount;
-        System.out.println(response);
-        return response;
     }
 
     @Override
@@ -55,9 +29,12 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
     }
 
     @Override
-    public String openPosition(Wallet wallet, Strategy strategy) {
-        return "";
+    public String GetProfit(Long amount) {
+        String response = "long executed in binance with this amount: " + amount;
+        System.out.println(response);
+        return response;
     }
+
 
     @Override
     public List<ExchangeStock> getAllExchangeStocks() {
@@ -69,18 +46,36 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
         return null;
     }
 
+
+    // todo ?? replace Position to Strategy
     @Override
-    public Position buy(Position openedPosition) {
+    public Position openPosition(Position position) {
+//        LinkedHashMap<String,Object> parameters = new LinkedHashMap<String,Object>();
+//        UMFuturesClientImpl client = new UMFuturesClientImpl(API_KEY, API_SECRET);
+//
+//        parameters.put("symbol","BTCUSDT");
+//        parameters.put("side", "SELL");
+//        parameters.put("type", "LIMIT");
+//        parameters.put("timeInForce", "GTC");
+//        parameters.put("quantity", 0.01);
+//        parameters.put("price", 9500);
+//
+//        String result = client.account().newOrder(parameters);
         return null;
     }
 
     @Override
-    public Position sell(Position openedPosition) {
+    public Position closePosition(Position position) {
         return null;
     }
 
     @Override
-    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock) {
+    public Position closeAll(Position position) {
+        return null;
+    }
+
+    @Override
+    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock, TimeFrame timeFrame) {
         // previously filled these items: id, name, symbol
         stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
         stock.setMa7("20");
@@ -95,15 +90,15 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
     }
 
     @Override
-    public Long getPriceFromExchangeServiceApi(Position openedPosition) {
+    public float getPriceFromExchangeServiceApi(Position openedPosition) {
         System.out.println("get current price from exchange api ...");
-        return 10l;
+        return 25000;
     }
 
     @Override
-    public Long getProfitFromExchangeServiceApi(Position openPosition) {
+    public float getProfitFromExchangeServiceApi(Position openPosition) {
         System.out.println("get profit from exchange api ...");
-        return 2l;
+        return 12;
     }
 
 }
