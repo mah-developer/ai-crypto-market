@@ -29,9 +29,9 @@ public class Wallet extends AuditableEntity {
     private Exchange exchange;
 
     @Column(nullable = false, unique = true)
-    private String publicKey;
+    private String apiKey;
     @Column(nullable = false)
-    private String encryptedPrivateKey; // Store securely
+    private String ApiSecret; // Store securely
 
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal usdBalance;
@@ -72,21 +72,21 @@ public class Wallet extends AuditableEntity {
         return this;
     }
 
-    public String getPublicKey() {
-        return publicKey;
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public Wallet setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
+    public Wallet setApiKey(String apiKey) {
+        this.apiKey = apiKey;
         return this;
     }
 
-    public String getEncryptedPrivateKey() {
-        return encryptedPrivateKey;
+    public String getApiSecret() {
+        return ApiSecret;
     }
 
-    public Wallet setEncryptedPrivateKey(String encryptedPrivateKey) {
-        this.encryptedPrivateKey = encryptedPrivateKey;
+    public Wallet setApiSecret(String apiSecret) {
+        this.ApiSecret = apiSecret;
         return this;
     }
 
