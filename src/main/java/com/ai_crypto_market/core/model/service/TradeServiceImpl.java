@@ -44,7 +44,7 @@ public class TradeServiceImpl implements TradeService {
             // todo save strategy, position object for ai purposes
             switch (afterAnalyzePosition.getStrategy().getTradeAction()){
                 case TradeAction.BUY -> openedPosition = exchangeService.buy(openedPosition);
-                case TradeAction.SELL -> openedPosition = exchangeService.sell(openedPosition);
+                case TradeAction.CLOSEALL -> openedPosition = exchangeService.sell(openedPosition);
             }
             // end each open position
         }
