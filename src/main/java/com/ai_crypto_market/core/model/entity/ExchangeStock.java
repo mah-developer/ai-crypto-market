@@ -1,6 +1,5 @@
 package com.ai_crypto_market.core.model.entity;
 
-import com.ai_crypto_market.core.model.enums.ChangeType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

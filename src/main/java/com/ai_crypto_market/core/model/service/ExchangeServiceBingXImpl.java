@@ -49,11 +49,6 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
     }
 
     @Override
-    public MarketData fetchMarketData(ExchangeStock exchangeStock) {
-        return null;
-    }
-
-    @Override
     public Position buy(Position openedPosition) {
         return null;
     }

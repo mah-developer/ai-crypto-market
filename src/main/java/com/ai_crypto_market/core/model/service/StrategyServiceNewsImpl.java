@@ -3,7 +3,6 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.News;
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
-import com.ai_crypto_market.core.model.entity.Strategy;
 import com.ai_crypto_market.core.model.repository.NewsRepository;
 import com.ai_crypto_market.core.model.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,8 @@ public class StrategyServiceNewsImpl implements StrategyService {
     @Autowired
     private NewsRepository newsRepository;
 
+    @Autowired
+    PositionServiceImpl positionService;
     @Autowired
     private StockRepository stockRepository;
 
@@ -33,8 +34,11 @@ public class StrategyServiceNewsImpl implements StrategyService {
         throw new RuntimeException("No stock mapped for news: " + news.getTitle());
     }
 
+
     @Override
-    public Strategy analyze(Position position) {
-        return null;
+    public Position analyze(Position position) {
+        Position newPosition = positionService.fillPositionObject(position);
+
+        return newPosition;
     }
 }

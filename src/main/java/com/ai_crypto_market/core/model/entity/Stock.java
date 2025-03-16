@@ -14,12 +14,11 @@ public class Stock extends AuditableEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String name; // Example: Bitcoin
+    private String name;
 
     @Column(nullable = false, unique = true)
-    private String symbol; // Example: BTC/USDT
-/// //////////////////////////////////////////////
-/// NEW PROPERTIES
+    private String symbol;
+
     @Transient
     private String rsi; // last 5 items based on timeFrame
     @Transient
@@ -38,7 +37,6 @@ public class Stock extends AuditableEntity {
     private int aiNews;
     @Transient
     private int smartMoney;
-    /// //////////////////////////////////////////////
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Strategy> strategies = new HashSet<>();
@@ -67,24 +65,6 @@ public class Stock extends AuditableEntity {
 
     public Stock setSymbol(String symbol) {
         this.symbol = symbol;
-        return this;
-    }
-
-    public Set<Strategy> getSignals() {
-        return strategies;
-    }
-
-    public Stock setSignals(Set<Strategy> strategies) {
-        this.strategies = strategies;
-        return this;
-    }
-
-    public Set<ExchangeStock> getExchangeStocks() {
-        return exchangeStocks;
-    }
-
-    public Stock setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
-        this.exchangeStocks = exchangeStocks;
         return this;
     }
 
@@ -166,6 +146,24 @@ public class Stock extends AuditableEntity {
 
     public Stock setSmartMoney(int smartMoney) {
         this.smartMoney = smartMoney;
+        return this;
+    }
+
+    public Set<Strategy> getStrategies() {
+        return strategies;
+    }
+
+    public Stock setStrategies(Set<Strategy> strategies) {
+        this.strategies = strategies;
+        return this;
+    }
+
+    public Set<ExchangeStock> getExchangeStocks() {
+        return exchangeStocks;
+    }
+
+    public Stock setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
+        this.exchangeStocks = exchangeStocks;
         return this;
     }
 }

@@ -4,9 +4,7 @@ import com.ai_crypto_market.core.model.enums.UserRole;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "TB_USER", indexes = {@Index(name = "idx_email", columnList = "email")})

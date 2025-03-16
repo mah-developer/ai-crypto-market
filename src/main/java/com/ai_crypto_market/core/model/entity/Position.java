@@ -2,6 +2,13 @@ package com.ai_crypto_market.core.model.entity;
 
 import com.ai_crypto_market.core.model.enums.PositionStatus;
 import com.ai_crypto_market.core.model.enums.PositionType;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Transient;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class Position {
     private Long id;
@@ -11,11 +18,32 @@ public class Position {
     private Long currentStopLoss;
     private Long entryPrice;
     private Long quantity;
+
+    @Enumerated(EnumType.STRING)
     private PositionStatus positionStatus;
+    @Enumerated(EnumType.STRING)
     private PositionType positionType;
+    @Transient
     private Long profit;
     private String exchangePositionId;
+    @Transient
     private Long currentPrice;
+    @Column(precision = 15, scale = 2)
+    private BigDecimal exitPrice; // Added for trade
+
+    @Column(nullable = false, precision = 5, scale = 2)
+    private int leverage;
+
+    @Column
+    private String openedPositionId; // Added for exchange position tracking
+
+    @Column
+    private LocalDateTime entryTime; // Added for trade
+
+    @Column
+    private LocalDateTime exitTime; // Added for trade
+
+    // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
@@ -75,15 +103,6 @@ public class Position {
         return this;
     }
 
-    public PositionStatus getTradeStatus() {
-        return positionStatus;
-    }
-
-    public Position setTradeStatus(PositionStatus positionStatus) {
-        this.positionStatus = positionStatus;
-        return this;
-    }
-
     public PositionStatus getPositionStatus() {
         return positionStatus;
     }
@@ -126,6 +145,51 @@ public class Position {
 
     public Position setCurrentPrice(Long currentPrice) {
         this.currentPrice = currentPrice;
+        return this;
+    }
+
+    public BigDecimal getExitPrice() {
+        return exitPrice;
+    }
+
+    public Position setExitPrice(BigDecimal exitPrice) {
+        this.exitPrice = exitPrice;
+        return this;
+    }
+
+    public int getLeverage() {
+        return leverage;
+    }
+
+    public Position setLeverage(int leverage) {
+        this.leverage = leverage;
+        return this;
+    }
+
+    public String getOpenedPositionId() {
+        return openedPositionId;
+    }
+
+    public Position setOpenedPositionId(String openedPositionId) {
+        this.openedPositionId = openedPositionId;
+        return this;
+    }
+
+    public LocalDateTime getEntryTime() {
+        return entryTime;
+    }
+
+    public Position setEntryTime(LocalDateTime entryTime) {
+        this.entryTime = entryTime;
+        return this;
+    }
+
+    public LocalDateTime getExitTime() {
+        return exitTime;
+    }
+
+    public Position setExitTime(LocalDateTime exitTime) {
+        this.exitTime = exitTime;
         return this;
     }
 }

@@ -3,8 +3,6 @@ package com.ai_crypto_market.core.model.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -17,6 +15,7 @@ public class Wallet extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PK_TB_WALLET")
     private Long id;
+
     @Column(nullable = false)
     private String name;
 
@@ -30,16 +29,25 @@ public class Wallet extends AuditableEntity {
 
     @Column(nullable = false, unique = true)
     private String apiKey;
+
     @Column(nullable = false)
-    private String ApiSecret; // Store securely
+    private String apiSecret; // Store securely
 
+    // todo update this when strategy check rules and give us NONE action
     @Column(nullable = false, precision = 15, scale = 2)
-    private BigDecimal usdBalance;
+    private BigDecimal availableBalance;
 
-    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<WalletSettings> walletSettings = new HashSet<>();
+    @Column(nullable = false, precision = 5, scale = 2)
+    private BigDecimal maxLeverage;
+
+    @Column(nullable = false, precision = 5, scale = 2)
+    private BigDecimal maxPercentOfAvailablePerPosition;
+
+    @Column(nullable = false)
+    private boolean status; // if true we can trade and means wallet is on and if false means wallet is off and no any trade do on this wallet
 
     // GETTERS AND SETTERS
+
 
     public Long getId() {
         return id;
@@ -82,30 +90,47 @@ public class Wallet extends AuditableEntity {
     }
 
     public String getApiSecret() {
-        return ApiSecret;
+        return apiSecret;
     }
 
     public Wallet setApiSecret(String apiSecret) {
-        this.ApiSecret = apiSecret;
+        this.apiSecret = apiSecret;
         return this;
     }
 
-
-    public BigDecimal getUsdBalance() {
-        return usdBalance;
+    public BigDecimal getAvailableBalance() {
+        return availableBalance;
     }
 
-    public Wallet setUsdBalance(BigDecimal usdBalance) {
-        this.usdBalance = usdBalance;
+    public Wallet setAvailableBalance(BigDecimal availableBalance) {
+        this.availableBalance = availableBalance;
         return this;
     }
 
-    public Set<WalletSettings> getWalletSettings() {
-        return walletSettings;
+    public BigDecimal getMaxLeverage() {
+        return maxLeverage;
     }
 
-    public Wallet setWalletSettings(Set<WalletSettings> walletSettings) {
-        this.walletSettings = walletSettings;
+    public Wallet setMaxLeverage(BigDecimal maxLeverage) {
+        this.maxLeverage = maxLeverage;
+        return this;
+    }
+
+    public BigDecimal getMaxPercentOfAvailablePerPosition() {
+        return maxPercentOfAvailablePerPosition;
+    }
+
+    public Wallet setMaxPercentOfAvailablePerPosition(BigDecimal maxPercentOfAvailablePerPosition) {
+        this.maxPercentOfAvailablePerPosition = maxPercentOfAvailablePerPosition;
+        return this;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public Wallet setStatus(boolean status) {
+        this.status = status;
         return this;
     }
 }

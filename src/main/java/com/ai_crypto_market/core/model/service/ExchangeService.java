@@ -14,8 +14,6 @@ public interface ExchangeService {
 
     List<ExchangeStock> getAllExchangeStocks();
 
-    MarketData fetchMarketData(ExchangeStock exchangeStock);
-
     Position buy(Position openedPosition);
     Position sell(Position openedPosition);
     Stock getFullStockInfoFromExchangeServiceApi(Stock stock);

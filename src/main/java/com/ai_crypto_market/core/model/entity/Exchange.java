@@ -23,7 +23,7 @@ public class Exchange extends AuditableEntity {
     private Exchanges exchangeName;
 
     @Column(nullable = false)
-    private String apiUrl;
+    private String baseApiUrl;
 
     @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Wallet> wallets = new HashSet<>();
@@ -50,12 +50,12 @@ public class Exchange extends AuditableEntity {
         return this;
     }
 
-    public String getApiUrl() {
-        return apiUrl;
+    public String getBaseApiUrl() {
+        return baseApiUrl;
     }
 
-    public Exchange setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
+    public Exchange setBaseApiUrl(String baseApiUrl) {
+        this.baseApiUrl = baseApiUrl;
         return this;
     }
 

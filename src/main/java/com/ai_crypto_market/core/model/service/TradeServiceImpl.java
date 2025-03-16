@@ -2,9 +2,7 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
-import com.ai_crypto_market.core.model.entity.Strategy;
 import com.ai_crypto_market.core.model.enums.Exchanges;
-import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,13 +15,7 @@ import java.util.List;
 public class TradeServiceImpl implements TradeService {
 
     @Autowired
-    @Qualifier("signalServiceFibonacci")
-    private StrategyService strategyServiceFibonacci;
-
-
-    @Autowired
-    @Qualifier("signalServiceHoliday")
-    private StrategyService strategyServiceHoliday;
+    PositionServiceImpl positionService;
 
     @Autowired
     @Qualifier("ExchangeBingXService")
@@ -46,12 +38,11 @@ public class TradeServiceImpl implements TradeService {
             openedPosition.setProfit(profit);
             openedPosition.setCurrentPrice(currentPrice);
             // based on strategy name on openedPosition object we choose the related strategyService
-            StrategyService strategyService = strategyFactory(openedPosition.getStrategy().getType());
-            Strategy afterAnalyzeStrategy = strategyService.analyze(openedPosition);
+            Position afterAnalyzePosition = positionService.analyze(openedPosition);
 
             // here we have a full object and new version of strategy object, which contains buy and sell percents
             // todo save strategy, position object for ai purposes
-            switch (afterAnalyzeStrategy.getTradeAction()){
+            switch (afterAnalyzePosition.getStrategy().getTradeAction()){
                 case TradeAction.BUY -> openedPosition = exchangeService.buy(openedPosition);
                 case TradeAction.SELL -> openedPosition = exchangeService.sell(openedPosition);
             }
@@ -59,16 +50,6 @@ public class TradeServiceImpl implements TradeService {
         }
     }
 
-    private StrategyService strategyFactory(StrategyType strategyType) {
-        switch (strategyType) {
-            case FIBONACCI:
-                return strategyServiceFibonacci;
-                case HOLIDAY:
-                    return strategyServiceHoliday;
-                    default:
-                        return null;
-        }
-    }
 
     private ExchangeService exchangeFactory(Exchanges exchangesName) {
         switch (exchangesName){
