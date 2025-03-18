@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @Qualifier("signalServiceFibonacci")
 public class StrategyServiceFibonacciImpl implements StrategyService {
@@ -17,15 +19,32 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         Position newPosition = positionService.fillPositionObject(position);
         // we have new position here
         // todo get fresh value of currentPrice, availableBalance and profit from exchange here
-        newPosition.setCurrentStopLoss(0l);
-        newPosition.setCurrentTargetPrice(0l);
 
-        newPosition.getWallet();
-        // after calculations (for example from wallet setting) calculate quantity
-        newPosition.setQuantity(10l);
 
-        // if strategy equals TradeAction.NONE => then update wallet.availableBalance
-        newPosition.getStrategy().setTradeAction(TradeAction.BUY);
+        // START STRATEGY -----------------------------------------------
+        // check price, profit, and stoploss to set ( tradeaction , and if needed ( set stoploss,target or quantity ) )
+        if(newPosition.getProfit()>12)
+        {
+            newPosition.getStrategy().setTradeAction(TradeAction.CHANGETPSL);
+            newPosition.setCurrentStopLoss(0L);
+            newPosition.setCurrentTargetPrice(0L);
+        }
+        else if(newPosition.getProfit()<21)
+        {
+            newPosition.setQuantity(10L);
+            newPosition.getStrategy().setTradeAction(TradeAction.BUY);
+        }
+        else if(newPosition.getProfit()==21)
+        {
+            newPosition.setQuantity(20L);
+            newPosition.getStrategy().setTradeAction(TradeAction.CLOSE);
+        }
+        else if(newPosition.getProfit()>=55)
+        {
+            newPosition.getStrategy().setTradeAction(TradeAction.CLOSEALL);
+        }
+        else
+            newPosition.getStrategy().setTradeAction(TradeAction.NONE);
 
         return newPosition;
     }

@@ -76,29 +76,13 @@ public class ExchangeServiceOandaImpl implements ExchangeService {
     }
 
     @Override
-    public Stock getFullStockInfoFromExchangeServiceApi(Stock stock) {
-        // previously filled these items: id, name, symbol
-        stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
-        stock.setMa7("20");
-        stock.setMa14("35");
-        stock.setMa21("45");
-        stock.setVolume("65,54,42,87,69"); // last 5 items based on timeFrame
-        stock.setCandle("12,22,23,24;31,32,33,34;41,42,43,44;51,52,53,54"); // last 5 items based on timeFrame
-        stock.setPriceAction(50);
-        stock.setAiNews(20);
-        stock.setSmartMoney(21);
+    public Stock getCandlestickDataFromExchangeServiceApi(Stock stock) {
         return stock;
-    }
-    @Override
-    public Long getPriceFromExchangeServiceApi(Position openedPosition) {
-        System.out.println("get current price from exchange api ...");
-        return 10l;
     }
 
     @Override
-    public Long getProfitFromExchangeServiceApi(Position openPosition) {
-        System.out.println("get profit from exchange api ...");
-        return 2l;
+    public Position getPositionInfoFromExchangeServiceApi(Position openedPosition) {
+        return openedPosition;
     }
 
 }

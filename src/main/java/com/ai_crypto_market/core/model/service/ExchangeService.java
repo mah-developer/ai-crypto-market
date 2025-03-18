@@ -16,7 +16,7 @@ public interface ExchangeService {
 
     Position buy(Position openedPosition);
     Position sell(Position openedPosition);
-    Stock getFullStockInfoFromExchangeServiceApi(Stock stock);
-    Long getPriceFromExchangeServiceApi(Position openedPosition);
-    Long getProfitFromExchangeServiceApi(Position openPosition);
+    //Stock getFullStockInfoFromExchangeServiceApi(Stock stock);
+    Stock getCandlestickDataFromExchangeServiceApi(Stock stock);
+    Position getPositionInfoFromExchangeServiceApi(Position openedPosition);
 }

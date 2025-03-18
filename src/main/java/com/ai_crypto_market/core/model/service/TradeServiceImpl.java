@@ -24,19 +24,26 @@ public class TradeServiceImpl implements TradeService {
     @Autowired
     @Qualifier("ExchangeBinanceService")
     private ExchangeService exchangeBinanceService;
+    @Autowired
+    private PositionServiceImpl positionServiceImpl;
 
     public void doTrade() {
-        List<Position> openPositions = getOpenPositions();
+        List<Position> openPositions = positionService.getOpenPositions();
         for (Position openedPosition : openPositions) {
             // fill ai news based it's service
             ExchangeService exchangeService = exchangeFactory(openedPosition.getWallet().getExchange().getExchangeName());
-            Long profit = exchangeService.getProfitFromExchangeServiceApi(openedPosition);
-            Long currentPrice = exchangeService.getPriceFromExchangeServiceApi(openedPosition);
-            Stock stock = exchangeService.getFullStockInfoFromExchangeServiceApi(openedPosition.getStrategy().getStock());
+
+            // Long profit = exchangeService.getProfitFromExchangeServiceApi(openedPosition);
+            // Long currentPrice = exchangeService.getPriceFromExchangeServiceApi(openedPosition);
+            openedPosition=exchangeService.getPositionInfoFromExchangeServiceApi(openedPosition);
+
+            //Stock stock = exchangeService.getFullStockInfoFromExchangeServiceApi(openedPosition.getStrategy().getStock());
+            Stock stock = positionService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock());
+
             // in other words we update the previous opened position
             openedPosition.getStrategy().setStock(stock);
-            openedPosition.setProfit(profit);
-            openedPosition.setCurrentPrice(currentPrice);
+            //openedPosition.setProfit(profit);
+            //openedPosition.setCurrentPrice(currentPrice);
             // based on strategy name on openedPosition object we choose the related strategyService
             Position afterAnalyzePosition = positionService.analyze(openedPosition);
 
@@ -44,7 +51,9 @@ public class TradeServiceImpl implements TradeService {
             // todo save strategy, position object for ai purposes
             switch (afterAnalyzePosition.getStrategy().getTradeAction()){
                 case TradeAction.BUY -> openedPosition = exchangeService.buy(openedPosition);
+                case TradeAction.CLOSE -> openedPosition = exchangeService.sell(openedPosition);
                 case TradeAction.CLOSEALL -> openedPosition = exchangeService.sell(openedPosition);
+                case TradeAction.CHANGETPSL -> openedPosition = exchangeService.sell(openedPosition);
             }
             // end each open position
         }
@@ -63,11 +72,6 @@ public class TradeServiceImpl implements TradeService {
     }
 
 
-    private List<Position> getOpenPositions() {
-        System.out.println("find and return openPositions ... ");
-        List<Position> openPositions = new ArrayList<>();
-        return openPositions;
-    }
 
 
 }
