@@ -36,9 +36,13 @@ public class StrategyServiceNewsImpl implements StrategyService {
 
 
     @Override
-    public Position analyze(Position position) {
+    public Position analyzeUpdate(Position position) {
         Position newPosition = positionService.fillPositionObject(position);
-
         return newPosition;
+    }
+
+    @Override
+    public Position analyzeNew() {
+        return null;
     }
 }

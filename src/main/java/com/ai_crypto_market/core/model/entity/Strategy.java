@@ -32,7 +32,13 @@ public class Strategy extends AuditableEntity {
     private BigDecimal buyPercent;
 
     @Column(precision = 5, scale = 2)
-    private BigDecimal sellPercent;
+    private BigDecimal defaultStoplossPercent;
+
+    @Column(precision = 5, scale = 2)
+    private BigDecimal defaultTargetPercent;
+
+    @Column(precision = 5, scale = 2)
+    private BigDecimal defaultLeverage;
 
     @Enumerated(EnumType.STRING)
     private TimeFrame timeFrame;
@@ -79,12 +85,37 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getSellPercent() {
-        return sellPercent;
+    public BigDecimal getDefaultStoplossPercent() {
+        return defaultStoplossPercent;
     }
 
-    public Strategy setSellPercent(BigDecimal sellPercent) {
-        this.sellPercent = sellPercent;
+    public Strategy setDefaultStoplossPercent(BigDecimal defaultStoplossPercent) {
+        this.defaultStoplossPercent = defaultStoplossPercent;
+        return this;
+    }
+
+    public BigDecimal getDefaultTargetPercent() {
+        return defaultTargetPercent;
+    }
+
+    public Strategy setDefaultTargetPercent(BigDecimal defaultTargetPercent) {
+        this.defaultTargetPercent = defaultTargetPercent;
+        return this;
+    }
+    public TimeFrame getTimeFrame() {
+        return timeFrame;
+    }
+
+    public Strategy setTimeFrame(TimeFrame timeFrame) {
+        this.timeFrame = timeFrame;
+        return this;
+    }
+    public BigDecimal getDefaultLeverage() {
+        return defaultLeverage;
+    }
+
+    public Strategy setDefaultLeverage(BigDecimal defaultLeverage) {
+        this.defaultLeverage = defaultLeverage;
         return this;
     }
 }

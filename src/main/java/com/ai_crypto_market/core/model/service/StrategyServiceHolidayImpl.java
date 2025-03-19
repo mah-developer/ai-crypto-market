@@ -12,10 +12,14 @@ public class StrategyServiceHolidayImpl implements StrategyService {
     PositionServiceImpl positionService;
 
     @Override
-    public Position analyze(Position position) {
+    public Position analyzeUpdate(Position position) {
         Position newPosition = positionService.fillPositionObject(position);
 
         return newPosition;
+    }
+    @Override
+    public Position analyzeNew() {
+        return null;
     }
 
 }

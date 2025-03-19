@@ -23,7 +23,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public Position analyze(Position openedPosition) {
         StrategyService strategyService = strategyFactory(openedPosition.getStrategy().getType());
-        return strategyService.analyze(openedPosition);
+        return strategyService.analyzeUpdate(openedPosition);
     }
 
     private StrategyService strategyFactory(StrategyType strategyType) {
