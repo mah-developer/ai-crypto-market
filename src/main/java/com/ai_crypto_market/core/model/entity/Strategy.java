@@ -3,18 +3,16 @@ package com.ai_crypto_market.core.model.entity;
 import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TimeFrame;
 import com.ai_crypto_market.core.model.enums.TradeAction;
-import com.ai_crypto_market.core.model.enums.PositionStatus;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TB_TRADE")
+@Table(name = "TB_STRATEGY")
 public class Strategy extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PK_TB_TRADE")
+    @Column(name = "PK_TB_STRATEGY")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,23 +20,19 @@ public class Strategy extends AuditableEntity {
     private Stock stock;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TradeAction tradeAction;
-
-    @Enumerated(EnumType.STRING)
     private StrategyType type;
 
     @Column(precision = 5, scale = 2)
-    private BigDecimal buyPercent;
-
-    @Column(precision = 5, scale = 2)
-    private BigDecimal defaultStoplossPercent;
+    private BigDecimal defaultStopLossPercent;
 
     @Column(precision = 5, scale = 2)
     private BigDecimal defaultTargetPercent;
 
-    @Column(precision = 5, scale = 2)
-    private BigDecimal defaultLeverage;
+
+    private int defaultLeverage;
+
+    @Column(nullable = false, precision = 5, scale = 2)
+    private BigDecimal defaultPercentOfAvailablePerPosition; // این استراتژی میخواد بره از ولت طرف بیت بخره. بهش میگیم اولین بار که میخوای بخری به این میزان درصد از موجودی ولت برو خرید کن.
 
     @Enumerated(EnumType.STRING)
     private TimeFrame timeFrame;
@@ -58,15 +52,6 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public TradeAction getTradeAction() {
-        return tradeAction;
-    }
-
-    public Strategy setTradeAction(TradeAction tradeAction) {
-        this.tradeAction = tradeAction;
-        return this;
-    }
-
     public StrategyType getType() {
         return type;
     }
@@ -76,21 +61,12 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getBuyPercent() {
-        return buyPercent;
+    public BigDecimal getDefaultStopLossPercent() {
+        return defaultStopLossPercent;
     }
 
-    public Strategy setBuyPercent(BigDecimal buyPercent) {
-        this.buyPercent = buyPercent;
-        return this;
-    }
-
-    public BigDecimal getDefaultStoplossPercent() {
-        return defaultStoplossPercent;
-    }
-
-    public Strategy setDefaultStoplossPercent(BigDecimal defaultStoplossPercent) {
-        this.defaultStoplossPercent = defaultStoplossPercent;
+    public Strategy setDefaultStopLossPercent(BigDecimal defaultStoplossPercent) {
+        this.defaultStopLossPercent = defaultStoplossPercent;
         return this;
     }
 
@@ -110,12 +86,22 @@ public class Strategy extends AuditableEntity {
         this.timeFrame = timeFrame;
         return this;
     }
-    public BigDecimal getDefaultLeverage() {
+
+    public int getDefaultLeverage() {
         return defaultLeverage;
     }
 
-    public Strategy setDefaultLeverage(BigDecimal defaultLeverage) {
+    public Strategy setDefaultLeverage(int defaultLeverage) {
         this.defaultLeverage = defaultLeverage;
+        return this;
+    }
+
+    public BigDecimal getDefaultPercentOfAvailablePerPosition() {
+        return defaultPercentOfAvailablePerPosition;
+    }
+
+    public Strategy setDefaultPercentOfAvailablePerPosition(BigDecimal defaultPercentOfAvailablePerPosition) {
+        this.defaultPercentOfAvailablePerPosition = defaultPercentOfAvailablePerPosition;
         return this;
     }
 }

@@ -8,13 +8,13 @@ import com.ai_crypto_market.core.model.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StrategyServiceNewsImpl implements StrategyService {
     @Autowired
     private NewsRepository newsRepository;
 
-    @Autowired
-    PositionServiceImpl positionService;
     @Autowired
     private StockRepository stockRepository;
 
@@ -36,9 +36,8 @@ public class StrategyServiceNewsImpl implements StrategyService {
 
 
     @Override
-    public Position analyzeUpdate(Position position) {
-        Position newPosition = positionService.fillPositionObject(position);
-        return newPosition;
+    public Position analyzeUpdate(Position position, Position newPosition, List<Position> positionHistoryBasedOnExchangeId) {
+        return null;
     }
 
     @Override

@@ -14,11 +14,22 @@ public class User extends AuditableEntity {
     @Column(name = "PK_TB_USER")
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(nullable = false, unique = true, length = 50)
+    private String firstName;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String lastName;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String username;
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(nullable = false, length = 255)
     private String passwordHash;
+
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -66,6 +77,33 @@ public class User extends AuditableEntity {
 
     public User setWallets(List<Wallet> wallets) {
         this.wallets = wallets;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public User setUsername(String username) {
+        this.username = username;
         return this;
     }
 }

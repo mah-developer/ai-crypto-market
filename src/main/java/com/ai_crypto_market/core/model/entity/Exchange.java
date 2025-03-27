@@ -1,6 +1,6 @@
 package com.ai_crypto_market.core.model.entity;
 
-import com.ai_crypto_market.core.model.enums.Exchanges;
+import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.ai_crypto_market.core.model.enums.MarketType;
 import jakarta.persistence.*;
 
@@ -20,7 +20,7 @@ public class Exchange extends AuditableEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Exchanges exchangeName;
+    private ExchangeName exchangeName;
 
     @Column(nullable = false)
     private String baseApiUrl;
@@ -41,11 +41,11 @@ public class Exchange extends AuditableEntity {
         return id;
     }
 
-    public Exchanges getExchangeName() {
+    public ExchangeName getExchangeName() {
         return exchangeName;
     }
 
-    public Exchange setExchangeName(Exchanges exchangeName) {
+    public Exchange setExchangeName(ExchangeName exchangeName) {
         this.exchangeName = exchangeName;
         return this;
     }

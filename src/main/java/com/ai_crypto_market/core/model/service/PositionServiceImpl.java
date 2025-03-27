@@ -3,6 +3,8 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
 import com.ai_crypto_market.core.model.enums.StrategyType;
+import com.ai_crypto_market.core.model.repository.ExchangeRepository;
+import com.ai_crypto_market.core.model.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,25 @@ public class PositionServiceImpl implements PositionService {
     @Qualifier("signalServiceHoliday")
     private StrategyService strategyServiceHoliday;
 
+    @Autowired
+    PositionRepository positionRepository;
+
     @Override
     public Position analyze(Position openedPosition) {
         StrategyService strategyService = strategyFactory(openedPosition.getStrategy().getType());
-        return strategyService.analyzeUpdate(openedPosition);
+        List<Position> positionHistoryBasedOnExchangeId = findAllByExchangePositionIdOrderByCreatedAtDesc(openedPosition.getExchangePositionId());
+        Position newPosition = fillPositionObject(openedPosition);
+        return strategyService.analyzeUpdate(openedPosition, newPosition, positionHistoryBasedOnExchangeId);
+    }
+
+    @Override
+    public Position changeTargetPriceAndStopLoss(Position openedPosition) {
+        return null;
+    }
+
+    @Override
+    public List<Position> findAllByExchangePositionIdOrderByCreatedAtDesc(String exchangePositionId) {
+        return positionRepository.findAllByExchangePositionIdOrderByCreatedAtDesc(exchangePositionId);
     }
 
     private StrategyService strategyFactory(StrategyType strategyType) {
@@ -54,19 +71,6 @@ public class PositionServiceImpl implements PositionService {
         return newPosition;
     }
 
-    public Stock getFullStockInfoFromExternalServiceApi(Stock stock) {
-        // previously filled these items: id, name, symbol
-        stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
-        stock.setMa7("20");
-        stock.setMa14("35");
-        stock.setMa21("45");
-        //stock.setVolume("65,54,42,87,69"); // last 5 items based on timeFrame
-        //stock.setCandle("12,22,23,24;31,32,33,34;41,42,43,44;51,52,53,54"); // last 5 items based on timeFrame
-        stock.setPriceAction(50);
-        stock.setAiNews(20);
-        stock.setSmartMoney(21);
-        return stock;
-    }
 
     public List<Position> getOpenPositions() {
         System.out.println("find and return openPositions ... ");

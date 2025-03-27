@@ -2,20 +2,22 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
-import com.ai_crypto_market.core.model.enums.Exchanges;
+import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TradeServiceImpl implements TradeService {
 
     @Autowired
-    PositionServiceImpl positionService;
+    private PositionServiceImpl positionService;
+
+    @Autowired
+    private StockServiceImpl stockService;
 
     @Autowired
     @Qualifier("ExchangeBingXService")
@@ -38,7 +40,7 @@ public class TradeServiceImpl implements TradeService {
             openedPosition=exchangeService.getPositionInfoFromExchangeServiceApi(openedPosition);
 
             //Stock stock = exchangeService.getFullStockInfoFromExchangeServiceApi(openedPosition.getStrategy().getStock());
-            Stock stock = positionService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock());
+            Stock stock = stockService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock());
 
             // in other words we update the previous opened position
             openedPosition.getStrategy().setStock(stock);
@@ -49,19 +51,18 @@ public class TradeServiceImpl implements TradeService {
 
             // here we have a full object and new version of strategy object, which contains buy and sell percents
             // todo save strategy, position object for ai purposes
-            switch (afterAnalyzePosition.getStrategy().getTradeAction()){
+            switch (afterAnalyzePosition.getTradeAction()){
                 case TradeAction.BUY -> openedPosition = exchangeService.buy(openedPosition);
                 case TradeAction.CLOSE -> openedPosition = exchangeService.sell(openedPosition);
-                case TradeAction.CLOSEALL -> openedPosition = exchangeService.sell(openedPosition);
-                case TradeAction.CHANGETPSL -> openedPosition = exchangeService.sell(openedPosition);
+                case TradeAction.CHANGETPSL -> openedPosition = positionService.changeTargetPriceAndStopLoss(openedPosition);
             }
             // end each open position
         }
     }
 
 
-    private ExchangeService exchangeFactory(Exchanges exchangesName) {
-        switch (exchangesName){
+    private ExchangeService exchangeFactory(ExchangeName exchangeNameName) {
+        switch (exchangeNameName){
             case BING_X:
                 return exchangeBingXService;
                 case BINANCE:

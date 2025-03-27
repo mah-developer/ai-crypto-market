@@ -4,6 +4,5 @@ public enum TradeAction {
     BUY,
     CLOSE,
     CHANGETPSL,
-    CLOSEALL,
     NONE
 }

@@ -2,46 +2,69 @@ package com.ai_crypto_market.core.model.entity;
 
 import com.ai_crypto_market.core.model.enums.PositionStatus;
 import com.ai_crypto_market.core.model.enums.PositionType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Transient;
+import com.ai_crypto_market.core.model.enums.TradeAction;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Position {
+@Entity
+public class Position extends AuditableEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_STRATEGY")
     private Strategy strategy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_WALLET")
     private Wallet wallet;
-    private Long currentTargetPrice;
-    private Long currentStopLoss;
-    private Long entryPrice;
-    private Long quantity;
 
     @Enumerated(EnumType.STRING)
     private PositionStatus positionStatus;
+
     @Enumerated(EnumType.STRING)
     private PositionType positionType;
-    @Transient
-    private Long profit;
-    private String exchangePositionId;
-    @Transient
-    private Long currentPrice;
+
     @Column(precision = 15, scale = 2)
     private BigDecimal exitPrice; // Added for trade
 
+    @Enumerated(EnumType.STRING)
+    @Transient
+    private TradeAction tradeAction;
+
     @Column(nullable = false, precision = 5, scale = 2)
     private int leverage;
-
-    @Column
-    private String openedPositionId; // Added for exchange position tracking
 
     @Column
     private LocalDateTime entryTime; // Added for trade
 
     @Column
     private LocalDateTime exitTime; // Added for trade
+
+    @Column(precision = 15, scale = 2)
+    private BigDecimal currentTargetPrice;
+
+    @Column(precision = 15, scale = 2)
+    private BigDecimal currentStopLoss;
+
+    @Column(precision = 15, scale = 2)
+    private BigDecimal entryPrice;
+
+    @Column(precision = 15, scale = 2)
+    private BigDecimal quantity;
+
+    private String activities; // whole activities applied on this (current) position
+
+    private String exchangePositionId;
+
+    @Transient
+    private Long profit;
+
+    @Transient
+    private Long currentPrice;
 
     // GETTERS AND SETTERS
 
@@ -67,42 +90,6 @@ public class Position {
         return this;
     }
 
-    public Long getCurrentTargetPrice() {
-        return currentTargetPrice;
-    }
-
-    public Position setCurrentTargetPrice(Long currentTargetPrice) {
-        this.currentTargetPrice = currentTargetPrice;
-        return this;
-    }
-
-    public Long getCurrentStopLoss() {
-        return currentStopLoss;
-    }
-
-    public Position setCurrentStopLoss(Long currentStopLoss) {
-        this.currentStopLoss = currentStopLoss;
-        return this;
-    }
-
-    public Long getEntryPrice() {
-        return entryPrice;
-    }
-
-    public Position setEntryPrice(Long entryPrice) {
-        this.entryPrice = entryPrice;
-        return this;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public Position setQuantity(Long quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
     public PositionStatus getPositionStatus() {
         return positionStatus;
     }
@@ -121,33 +108,6 @@ public class Position {
         return this;
     }
 
-    public Long getProfit() {
-        return profit;
-    }
-
-    public Position setProfit(Long profit) {
-        this.profit = profit;
-        return this;
-    }
-
-    public String getExchangePositionId() {
-        return exchangePositionId;
-    }
-
-    public Position setExchangePositionId(String exchangePositionId) {
-        this.exchangePositionId = exchangePositionId;
-        return this;
-    }
-
-    public Long getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public Position setCurrentPrice(Long currentPrice) {
-        this.currentPrice = currentPrice;
-        return this;
-    }
-
     public BigDecimal getExitPrice() {
         return exitPrice;
     }
@@ -157,21 +117,21 @@ public class Position {
         return this;
     }
 
+    public TradeAction getTradeAction() {
+        return tradeAction;
+    }
+
+    public Position setTradeAction(TradeAction tradeAction) {
+        this.tradeAction = tradeAction;
+        return this;
+    }
+
     public int getLeverage() {
         return leverage;
     }
 
     public Position setLeverage(int leverage) {
         this.leverage = leverage;
-        return this;
-    }
-
-    public String getOpenedPositionId() {
-        return openedPositionId;
-    }
-
-    public Position setOpenedPositionId(String openedPositionId) {
-        this.openedPositionId = openedPositionId;
         return this;
     }
 
@@ -190,6 +150,78 @@ public class Position {
 
     public Position setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
+        return this;
+    }
+
+    public BigDecimal getCurrentTargetPrice() {
+        return currentTargetPrice;
+    }
+
+    public Position setCurrentTargetPrice(BigDecimal currentTargetPrice) {
+        this.currentTargetPrice = currentTargetPrice;
+        return this;
+    }
+
+    public BigDecimal getCurrentStopLoss() {
+        return currentStopLoss;
+    }
+
+    public Position setCurrentStopLoss(BigDecimal currentStopLoss) {
+        this.currentStopLoss = currentStopLoss;
+        return this;
+    }
+
+    public BigDecimal getEntryPrice() {
+        return entryPrice;
+    }
+
+    public Position setEntryPrice(BigDecimal entryPrice) {
+        this.entryPrice = entryPrice;
+        return this;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public Position setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public String getActivities() {
+        return activities;
+    }
+
+    public Position setActivities(String activities) {
+        this.activities = activities;
+        return this;
+    }
+
+    public String getExchangePositionId() {
+        return exchangePositionId;
+    }
+
+    public Position setExchangePositionId(String exchangePositionId) {
+        this.exchangePositionId = exchangePositionId;
+        return this;
+    }
+
+    public Long getProfit() {
+        return profit;
+    }
+
+    public Position setProfit(Long profit) {
+        this.profit = profit;
+        return this;
+    }
+
+    public Long getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public Position setCurrentPrice(Long currentPrice) {
+        this.currentPrice = currentPrice;
         return this;
     }
 }
