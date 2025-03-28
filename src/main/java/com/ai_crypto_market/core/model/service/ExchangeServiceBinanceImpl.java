@@ -153,8 +153,8 @@ public class ExchangeServiceBinanceImpl implements ExchangeService {
         //        "updateTime": 1720736417660
         //  }
         //]
-        openedPosition.setProfit(2L);//"unRealizedProfit"
-        openedPosition.setCurrentPrice(20L);//"markPrice"
+        openedPosition.setProfit(new BigDecimal(2));//"unRealizedProfit"
+        openedPosition.setCurrentPrice(new BigDecimal(20));//"markPrice"
         openedPosition.getWallet().setAvailableBalance(BigDecimal.valueOf(100));//"isolatedWallet"
         return openedPosition;
     }

@@ -18,45 +18,52 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         // we have new position here
         // todo get fresh value of currentPrice, availableBalance and profit from exchange here
 
-        // check Strategy For Update Position ////////
         BigDecimal currentTP = position.getCurrentTargetPrice();
         BigDecimal currentSL = position.getCurrentStopLoss();
-        Long currentPrice = position.getCurrentPrice();
-        Long currentProfit = position.getProfit();
+        BigDecimal currentPrice = position.getCurrentPrice();
+        BigDecimal currentProfit = position.getProfit();
         BigDecimal entryPrice = position.getEntryPrice();
         BigDecimal quantity = position.getQuantity(); //
-        // برای دریافت quantity اولیه
 
-        Position entryPositionSnapshot = positionHistoryBasedOnExchangeId.getFirst();
+        BigDecimal entryQuantity=positionHistoryBasedOnExchangeId.getFirst().getQuantity();
+        boolean close21Percent = positionHistoryBasedOnExchangeId.stream()
+                .anyMatch(pos -> pos.getActivities().contains("close21percent"));
+        boolean buy13Percent = positionHistoryBasedOnExchangeId.stream()
+                .anyMatch(pos -> pos.getActivities().contains("buy13percent"));
 
-        /// ///////////////////////////////////////////
         // START STRATEGY -----------------------------------------------
+
+        BigDecimal threshold = currentTP.multiply(new BigDecimal("0.34")); // Calculate 34% of currentTP
+        BigDecimal limitPrice = entryPrice.add(threshold); // Add the threshold to the entryPrice
+        threshold = currentTP.multiply(new BigDecimal("0.5")); // Calculate 50% of currentTP
+        BigDecimal changeSL = entryPrice.add(threshold); // Add the threshold to the changeSL
+
         // اگر قیمت به TP رسید، یا قیمت به SL رسید ، کل پوزیشن را ببند
+        if (currentPrice.compareTo(currentSL) < 0 || currentPrice.compareTo(currentTP) > 0) {
+            newPosition.setQuantity(quantity);
+            newPosition.setTradeAction(TradeAction.CLOSE);
+            newPosition.setActivities("closeAll");
+        }
         // اگر قیمت از نقطه ورود 34% TP رفت بالا، 21% پوزیشن را ببند
-        // اگر قیمت برگشت به نقطه خرید و  قبلا 21% فروخته شده بود، 13% مبلغ ورود را مجددا بخر
-        // اگر 2% نسبت به نقطه ورود افت قیمت داشت و مقدار خرید همان مقدار ورود است، به میزان 55% سرمایه ورود اولیه، مجددا وارد شو و TP را 1% کم کن
-
-        // START STRATEGY -----------------------------------------------
-        // check price, profit, and stoploss to set ( tradeaction , and if needed ( set stoploss,target or quantity ) )
-        if(newPosition.getProfit()>12)
+        else if (currentPrice.compareTo(limitPrice) > 0 && !close21Percent) {
+            BigDecimal percentage = quantity.multiply(new BigDecimal("0.21")); // Calculate 21% of quantity
+            newPosition.setQuantity(percentage);
+            newPosition.setTradeAction(TradeAction.CLOSE);
+            newPosition.setActivities("close21percent");
+        }
+        // اگر قیمت برگشت به نقطه خرید و قبلا 21% فروخته شده بود، 13% مبلغ ورود را مجددا بخر
+        else if (currentPrice.compareTo(entryPrice) < 0 && close21Percent && !buy13Percent)
+        {
+            BigDecimal percentage = entryQuantity.multiply(new BigDecimal("0.13")); // Calculate 21% of quantity
+            newPosition.setQuantity(percentage);
+            newPosition.setTradeAction(TradeAction.BUY);
+            newPosition.setActivities("buy13percent");
+        }
+        else if (currentPrice.compareTo(changeSL) > 0)
         {
             newPosition.setTradeAction(TradeAction.CHANGETPSL);
-            newPosition.setCurrentStopLoss(new BigDecimal(0));
-            newPosition.setCurrentTargetPrice(new BigDecimal(0));
-        }
-        else if(newPosition.getProfit()<21)
-        {
-            newPosition.setQuantity(new BigDecimal(0));
-            newPosition.setTradeAction(TradeAction.BUY);
-        }
-        else if(newPosition.getProfit()==21)
-        {
-            newPosition.setQuantity(new BigDecimal(20));
-            newPosition.setTradeAction(TradeAction.CLOSE);
-        }
-        else if(newPosition.getProfit()>=55)
-        {
-//            newPosition.getStrategy().setTradeAction(TradeAction.CLOSEALL);
+            newPosition.setCurrentStopLoss(entryPrice);
+            newPosition.setActivities("changeTpSl");
         }
         else
             newPosition.setTradeAction(TradeAction.NONE);

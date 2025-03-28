@@ -61,10 +61,10 @@ public class Position extends AuditableEntity {
     private String exchangePositionId;
 
     @Transient
-    private Long profit;
+    private BigDecimal profit;
 
     @Transient
-    private Long currentPrice;
+    private BigDecimal currentPrice;
 
     // GETTERS AND SETTERS
 
@@ -207,20 +207,20 @@ public class Position extends AuditableEntity {
         return this;
     }
 
-    public Long getProfit() {
+    public BigDecimal getProfit() {
         return profit;
     }
 
-    public Position setProfit(Long profit) {
+    public Position setProfit(BigDecimal profit) {
         this.profit = profit;
         return this;
     }
 
-    public Long getCurrentPrice() {
+    public BigDecimal getCurrentPrice() {
         return currentPrice;
     }
 
-    public Position setCurrentPrice(Long currentPrice) {
+    public Position setCurrentPrice(BigDecimal currentPrice) {
         this.currentPrice = currentPrice;
         return this;
     }
