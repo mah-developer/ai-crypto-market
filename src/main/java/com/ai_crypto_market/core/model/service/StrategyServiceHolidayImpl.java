@@ -1,6 +1,7 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
+import com.ai_crypto_market.core.model.entity.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class StrategyServiceHolidayImpl implements StrategyService {
     }
 
     @Override
-    public Position analyzeNew() {
+    public Position analyzeNew(Stock stock) {
         return null;
     }
 

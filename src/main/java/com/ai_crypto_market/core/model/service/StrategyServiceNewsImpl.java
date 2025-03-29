@@ -41,7 +41,7 @@ public class StrategyServiceNewsImpl implements StrategyService {
     }
 
     @Override
-    public Position analyzeNew() {
+    public Position analyzeNew(Stock stock) {
         return null;
     }
 

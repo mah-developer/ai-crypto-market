@@ -2,6 +2,7 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.Wallet;
 import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TradeServiceImpl implements TradeService {
@@ -28,6 +30,8 @@ public class TradeServiceImpl implements TradeService {
     private ExchangeService exchangeBinanceService;
     @Autowired
     private PositionServiceImpl positionServiceImpl;
+
+
 
     public void doTrade() {
         List<Position> openPositions = positionService.getOpenPositions();
@@ -57,7 +61,27 @@ public class TradeServiceImpl implements TradeService {
                 case TradeAction.CHANGETPSL -> openedPosition = positionService.changeTargetPriceAndStopLoss(openedPosition);
             }
             // end each open position
+
         }
+
+
+        // بررسی موقعیت برای باز کردن پوزیشن جدید
+        // todo ولت های فعال، هر ولت چه استراتژی دارد و هر استراتژی موقعیت تمام استاک ها بررسی شود
+
+//        List<Wallet> activeWallets = walletService.getActiveWallet();
+//        for (Position openedPosition : openPositions) {
+//            ExchangeService exchangeService = exchangeFactory(openedPosition.getWallet().getExchange().getExchangeName());
+//            openedPosition=exchangeService.getPositionInfoFromExchangeServiceApi(openedPosition);
+//            Stock stock = stockService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock());
+//            openedPosition.getStrategy().setStock(stock);
+//            Position afterAnalyzePosition = positionService.analyze(openedPosition);
+//            Position afterAnalyzeStock = strategyService.analyzeNew(stock);
+//            if (Objects.requireNonNull(afterAnalyzeStock.getTradeAction()) == TradeAction.BUY) {
+//                openedPosition = exchangeService.buy(openedPosition);
+//            }
+//        }
+
+
     }
 
 

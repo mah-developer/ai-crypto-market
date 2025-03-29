@@ -33,6 +33,7 @@ public class PositionServiceImpl implements PositionService {
         return strategyService.analyzeUpdate(openedPosition, newPosition, positionHistoryBasedOnExchangeId);
     }
 
+
     @Override
     public Position changeTargetPriceAndStopLoss(Position openedPosition) {
         return null;

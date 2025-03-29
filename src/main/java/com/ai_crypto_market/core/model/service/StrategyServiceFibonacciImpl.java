@@ -1,6 +1,8 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
+import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.enums.PositionType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,8 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         BigDecimal currentProfit = position.getProfit();
         BigDecimal entryPrice = position.getEntryPrice();
         BigDecimal quantity = position.getQuantity(); //
-// اولین حجمی که بار اول وارد معاماه شده
+        PositionType positiontype = position.getPositionType(); //
+        // اولین حجمی که بار اول وارد معاماه شده
         BigDecimal entryQuantity=positionHistoryBasedOnExchangeId.getFirst().getQuantity();
         boolean close21Percent = positionHistoryBasedOnExchangeId.stream()
                 .anyMatch(pos -> pos.getActivities().contains("close21percent"));
@@ -38,29 +41,49 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         //  مقدار limitPrice برابر 34% اختلاف قیمت قیمت اولیه با TP است. یعنی اگر قیمت اولیه 1000$ باشه و تارگت 1200$ باشه limitPrice برابر 34% از 200 بعلاوه مقدار قیمت اولیه خواهد بود که برابر با 68$ + 1000$ است
         threshold = (currentTP.subtract(entryPrice)).multiply(new BigDecimal("0.5")); // Calculate 50% of currentTP
         BigDecimal changeSL = entryPrice.add(threshold); // Add the threshold to the changeSL
-//  مقدار changeSL برابر 50% اختلاف قیمت قیمت اولیه با TP است. یعنی اگر قیمت اولیه 1000$ باشه و تارگت 1200$ باشه limitPrice برابر 34% از 200 بعلاوه مقدار قیمت اولیه خواهد بود که برابر با 68$ + 1000$ است
+        //  مقدار changeSL برابر 50% اختلاف قیمت قیمت اولیه با TP است. یعنی اگر قیمت اولیه 1000$ باشه و تارگت 1200$ باشه limitPrice برابر 34% از 200 بعلاوه مقدار قیمت اولیه خواهد بود که برابر با 68$ + 1000$ است
         // اگر قیمت به TP رسید، یا قیمت به SL رسید ، کل پوزیشن را ببند
-        if (currentPrice.compareTo(currentSL) < 0 || currentPrice.compareTo(currentTP) > 0) {
+        if (
+                (currentPrice.compareTo(currentSL) < 0 && positiontype==PositionType.LONG)
+                || (currentPrice.compareTo(currentSL) > 0 && positiontype==PositionType.SHORT)
+                || (currentPrice.compareTo(currentTP) > 0 && positiontype==PositionType.LONG)
+                || (currentPrice.compareTo(currentTP) < 0 && positiontype==PositionType.SHORT)
+            )
+        {
             newPosition.setQuantity(quantity);
             newPosition.setTradeAction(TradeAction.CLOSE);
             newPosition.setActivities("closeAll");
         }
         // اگر قیمت از نقطه ورود 34% TP رفت بالا، 21% پوزیشن را ببند
-        else if (currentPrice.compareTo(limitPrice) > 0 && !close21Percent) {
+        else if (
+                ((currentPrice.compareTo(limitPrice) > 0  && positiontype==PositionType.LONG)
+                || (currentPrice.compareTo(limitPrice) < 0  && positiontype==PositionType.SHORT))
+                && !close21Percent
+                )
+        {
             BigDecimal percentage = quantity.multiply(new BigDecimal("0.21")); // Calculate 21% of quantity
             newPosition.setQuantity(percentage);
             newPosition.setTradeAction(TradeAction.CLOSE);
             newPosition.setActivities("close21percent");
         }
         // اگر قیمت برگشت به نقطه خرید و قبلا 21% فروخته شده بود، 13% مبلغ ورود را مجددا بخر
-        else if (currentPrice.compareTo(entryPrice) < 0 && close21Percent && !buy13Percent)
+        else if (
+                    ((currentPrice.compareTo(entryPrice) < 0 && positiontype==PositionType.LONG)
+                    || (currentPrice.compareTo(entryPrice) > 0 && positiontype==PositionType.SHORT))
+                    && close21Percent
+                    && !buy13Percent
+                )
         {
             BigDecimal percentage = entryQuantity.multiply(new BigDecimal("0.13")); // Calculate 21% of quantity
             newPosition.setQuantity(percentage);
             newPosition.setTradeAction(TradeAction.BUY);
             newPosition.setActivities("buy13percent");
         }
-        else if (currentPrice.compareTo(changeSL) > 0)
+        // اگر قیمت تا 50 درصد TP بالا رفت ، SL را به نقطه ورود منتقل کن
+        else if (
+                    (currentPrice.compareTo(changeSL) > 0 && positiontype==PositionType.LONG)
+                    || (currentPrice.compareTo(changeSL) < 0 && positiontype==PositionType.SHORT)
+                )
         {
             newPosition.setTradeAction(TradeAction.CHANGETPSL);
             newPosition.setCurrentStopLoss(entryPrice);
@@ -73,7 +96,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
     }
 
     @Override
-    public Position analyzeNew()
+    public Position analyzeNew(Stock stock)
     {
 //        Position newPosition = positionService.fillPositionObject(position);
 //        // THIS BLOCK CODE FOR NEW POSITION in STRATEGY ////////////////////////
