@@ -7,4 +7,6 @@ import java.util.List;
 public interface StrategyService {
     Position analyzeUpdate(Position position, Position newPosition, List<Position> positionHistoryBasedOnExchangeId);
     Position analyzeNew();
+    // todo: call it on application startup
+    void onInitialApplicationPersistDefaultStrategy();
 }

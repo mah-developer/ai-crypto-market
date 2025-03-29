@@ -2,7 +2,6 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.enums.TradeAction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         BigDecimal currentProfit = position.getProfit();
         BigDecimal entryPrice = position.getEntryPrice();
         BigDecimal quantity = position.getQuantity(); //
-
+// اولین حجمی که بار اول وارد معاماه شده
         BigDecimal entryQuantity=positionHistoryBasedOnExchangeId.getFirst().getQuantity();
         boolean close21Percent = positionHistoryBasedOnExchangeId.stream()
                 .anyMatch(pos -> pos.getActivities().contains("close21percent"));
@@ -33,11 +32,13 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
 
         // START STRATEGY -----------------------------------------------
 
-        BigDecimal threshold = currentTP.multiply(new BigDecimal("0.34")); // Calculate 34% of currentTP
+        // اگر قیمت از قیمت ورود 34% رفت بال یع کاری انجام بده
+        BigDecimal threshold = (currentTP.subtract(entryPrice)).multiply(new BigDecimal("0.34")); // Calculate 34% of currentTP
         BigDecimal limitPrice = entryPrice.add(threshold); // Add the threshold to the entryPrice
-        threshold = currentTP.multiply(new BigDecimal("0.5")); // Calculate 50% of currentTP
+        //  مقدار limitPrice برابر 34% اختلاف قیمت قیمت اولیه با TP است. یعنی اگر قیمت اولیه 1000$ باشه و تارگت 1200$ باشه limitPrice برابر 34% از 200 بعلاوه مقدار قیمت اولیه خواهد بود که برابر با 68$ + 1000$ است
+        threshold = (currentTP.subtract(entryPrice)).multiply(new BigDecimal("0.5")); // Calculate 50% of currentTP
         BigDecimal changeSL = entryPrice.add(threshold); // Add the threshold to the changeSL
-
+//  مقدار changeSL برابر 50% اختلاف قیمت قیمت اولیه با TP است. یعنی اگر قیمت اولیه 1000$ باشه و تارگت 1200$ باشه limitPrice برابر 34% از 200 بعلاوه مقدار قیمت اولیه خواهد بود که برابر با 68$ + 1000$ است
         // اگر قیمت به TP رسید، یا قیمت به SL رسید ، کل پوزیشن را ببند
         if (currentPrice.compareTo(currentSL) < 0 || currentPrice.compareTo(currentTP) > 0) {
             newPosition.setQuantity(quantity);
@@ -91,5 +92,10 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
 
 
         return null;
+    }
+
+    @Override
+    public void onInitialApplicationPersistDefaultStrategy() {
+
     }
 }

@@ -44,4 +44,9 @@ public class StrategyServiceNewsImpl implements StrategyService {
     public Position analyzeNew() {
         return null;
     }
+
+    @Override
+    public void onInitialApplicationPersistDefaultStrategy() {
+
+    }
 }

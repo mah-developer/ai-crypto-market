@@ -21,4 +21,9 @@ public class StrategyServiceHolidayImpl implements StrategyService {
         return null;
     }
 
+    @Override
+    public void onInitialApplicationPersistDefaultStrategy() {
+
+    }
+
 }
