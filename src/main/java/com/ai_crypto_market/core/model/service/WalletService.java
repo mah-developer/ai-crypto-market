@@ -1,15 +1,11 @@
-package com.ai_crypto_market.core.model.repository;
-
+package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Wallet;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface WalletRepository extends JpaRepository<Wallet, Long> {
+public interface WalletService {
     List<Wallet> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId);
     List<Wallet> getWalletByExchangeIdOrderByCreatedAtDesc(Long ExchangeId);
     List<Wallet> getAllActiveWalletOrderByCreatedAtDesc();

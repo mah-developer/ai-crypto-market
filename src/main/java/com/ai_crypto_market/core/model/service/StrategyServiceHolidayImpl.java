@@ -14,12 +14,13 @@ public class StrategyServiceHolidayImpl implements StrategyService {
 
     @Override
     public Position analyzeUpdate(Position position, Position newPosition, List<Position> positionHistoryBasedOnExchangeId) {
-        return null;
+        return newPosition;
     }
 
     @Override
     public Position analyzeNew(Stock stock) {
-        return null;
+        Position position = new Position();
+        return position;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class Strategy extends AuditableEntity {
     @Column(precision = 5, scale = 2)
     private BigDecimal defaultTargetPercent;
 
-
+    @Column(precision = 5, scale = 2)
     private int defaultLeverage;
 
     @Column(nullable = false, precision = 5, scale = 2)

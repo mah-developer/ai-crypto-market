@@ -1,13 +1,19 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.Wallet;
+import com.ai_crypto_market.core.model.repository.StockRepository;
+import com.ai_crypto_market.core.model.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StockServiceImpl implements StockService {
 
-
+    @Autowired
+    StockRepository stockRepository;
 
     @Override
     public Stock getFullStockInfoFromExternalServiceApi(Stock stock) {
@@ -23,4 +29,10 @@ public class StockServiceImpl implements StockService {
         stock.setSmartMoney(21);
         return stock;
     }
+
+    @Override
+    public List<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId) {
+        return stockRepository.findAllByStrategyIdOrderByCreatedAtDesc(strategyId);
+    }
+
 }

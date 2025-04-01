@@ -2,6 +2,7 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.enums.PositionActivity;
 import com.ai_crypto_market.core.model.enums.PositionType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,9 +30,9 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         // اولین حجمی که بار اول وارد معاماه شده
         BigDecimal entryQuantity=positionHistoryBasedOnExchangeId.getFirst().getQuantity();
         boolean close21Percent = positionHistoryBasedOnExchangeId.stream()
-                .anyMatch(pos -> pos.getActivities().contains("close21percent"));
+                .anyMatch(pos -> pos.getActivities().contains(PositionActivity.close21PercentinFibonacci.name()));
         boolean buy13Percent = positionHistoryBasedOnExchangeId.stream()
-                .anyMatch(pos -> pos.getActivities().contains("buy13percent"));
+                .anyMatch(pos -> pos.getActivities().contains(PositionActivity.buy13PercentinFibonacci.name()));
 
         // START STRATEGY -----------------------------------------------
 
@@ -52,7 +53,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         {
             newPosition.setQuantity(quantity);
             newPosition.setTradeAction(TradeAction.CLOSE);
-            newPosition.setActivities("closeAll");
+            newPosition.setActivities(PositionActivity.closeAllPosition.name());
         }
         // اگر قیمت از نقطه ورود 34% TP رفت بالا، 21% پوزیشن را ببند
         else if (
@@ -64,7 +65,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
             BigDecimal percentage = quantity.multiply(new BigDecimal("0.21")); // Calculate 21% of quantity
             newPosition.setQuantity(percentage);
             newPosition.setTradeAction(TradeAction.CLOSE);
-            newPosition.setActivities("close21percent");
+            newPosition.setActivities(PositionActivity.close21PercentinFibonacci.name());
         }
         // اگر قیمت برگشت به نقطه خرید و قبلا 21% فروخته شده بود، 13% مبلغ ورود را مجددا بخر
         else if (
@@ -77,7 +78,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
             BigDecimal percentage = entryQuantity.multiply(new BigDecimal("0.13")); // Calculate 21% of quantity
             newPosition.setQuantity(percentage);
             newPosition.setTradeAction(TradeAction.BUY);
-            newPosition.setActivities("buy13percent");
+            newPosition.setActivities(PositionActivity.buy13PercentinFibonacci.name());
         }
         // اگر قیمت تا 50 درصد TP بالا رفت ، SL را به نقطه ورود منتقل کن
         else if (
@@ -87,7 +88,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
         {
             newPosition.setTradeAction(TradeAction.CHANGETPSL);
             newPosition.setCurrentStopLoss(entryPrice);
-            newPosition.setActivities("changeTpSl");
+            newPosition.setActivities(PositionActivity.changeTpSl.name());
         }
         else
             newPosition.setTradeAction(TradeAction.NONE);
@@ -98,7 +99,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
     @Override
     public Position analyzeNew(Stock stock)
     {
-//        Position newPosition = positionService.fillPositionObject(position);
+          Position position = new Position();
 //        // THIS BLOCK CODE FOR NEW POSITION in STRATEGY ////////////////////////
 //        var timeframe= Strategy // 1H
 //        var TP=position.getStrategy().getDefaultTargetPercent(); // 5%
@@ -114,7 +115,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
 //        /// //////////////////////////////////////////////////////////////////
 
 
-        return null;
+        return position;
     }
 
     @Override
