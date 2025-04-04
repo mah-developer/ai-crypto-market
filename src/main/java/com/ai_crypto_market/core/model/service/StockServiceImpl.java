@@ -1,9 +1,7 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Stock;
-import com.ai_crypto_market.core.model.entity.Wallet;
 import com.ai_crypto_market.core.model.repository.StockRepository;
-import com.ai_crypto_market.core.model.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

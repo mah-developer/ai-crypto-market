@@ -1,8 +1,6 @@
 package com.ai_crypto_market.core.common.schedullers;
 
 import com.ai_crypto_market.core.model.service.TradeService;
-import com.ai_crypto_market.core.model.service.TradeServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

@@ -2,10 +2,12 @@ package com.ai_crypto_market.core.common.factories;
 
 import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.ai_crypto_market.core.model.service.ExchangeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class ExchangeFactory {
