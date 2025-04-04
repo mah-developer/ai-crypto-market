@@ -22,7 +22,8 @@ public class Exchange extends AuditableEntity {
     @Column(nullable = false)
     private ExchangeName exchangeName;
 
-    @Column(nullable = false)
+
+    @Column(name = "API_URL", nullable = false)
     private String baseApiUrl;
 
     @OneToMany(mappedBy = "exchange", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

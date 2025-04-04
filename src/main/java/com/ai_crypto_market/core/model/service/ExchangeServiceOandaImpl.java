@@ -1,6 +1,7 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
+import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.binance.connector.futures.client.impl.UMFuturesClientImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,18 @@ import java.util.List;
 // forex exchange (e.g., OANDA)
 @Service
 @Qualifier("ExchangeOandaService")
-public class ExchangeServiceOandaImpl implements ExchangeService {
+public class ExchangeServiceOandaImpl extends ExchangeServiceCommonImpl {
     String API_KEY="";
     String API_SECRET="";
 
 
     @Override
-    public String ExchangeInformation() {
+    public ExchangeName getExchangeName() {
+        return ExchangeName.OANDA;
+    }
+
+    @Override
+    public String exchangeInformation() {
         UMFuturesClientImpl client = new UMFuturesClientImpl();
         String result = client.market().exchangeInfo();
         return result;
@@ -26,7 +32,7 @@ public class ExchangeServiceOandaImpl implements ExchangeService {
 
 
     @Override
-    public String OpenPosition(Strategy strategy) {
+    public String openPosition(Strategy strategy) {
         LinkedHashMap<String,Object> parameters = new LinkedHashMap<String,Object>();
         UMFuturesClientImpl client = new UMFuturesClientImpl(API_KEY, API_SECRET);
 
@@ -42,14 +48,14 @@ public class ExchangeServiceOandaImpl implements ExchangeService {
     }
 
     @Override
-    public String ClosePosition(Long amount) {
+    public String closePosition(Long amount) {
         String response = "sell executed in binance with this amount: " + amount;
         System.out.println(response);
         return response;
     }
 
     @Override
-    public String GetBalance(Long amount) {
+    public String getBalance(Long amount) {
         String response = "long executed in binance with this amount: " + amount;
         System.out.println(response);
         return response;

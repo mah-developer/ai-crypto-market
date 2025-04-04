@@ -10,4 +10,6 @@ public interface PositionService {
     Position changeTargetPriceAndStopLoss(Position openedPosition);
 
     List<Position> findAllByExchangePositionIdOrderByCreatedAtDesc(String exchangePositionId);
+
+    List<Position> getOpenPositions();
 }

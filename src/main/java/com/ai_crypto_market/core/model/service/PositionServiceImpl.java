@@ -1,9 +1,7 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.Position;
-import com.ai_crypto_market.core.model.entity.Stock;
 import com.ai_crypto_market.core.model.enums.StrategyType;
-import com.ai_crypto_market.core.model.repository.ExchangeRepository;
 import com.ai_crypto_market.core.model.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -72,7 +70,7 @@ public class PositionServiceImpl implements PositionService {
         return newPosition;
     }
 
-
+    @Override
     public List<Position> getOpenPositions() {
         System.out.println("find and return openPositions ... ");
         List<Position> openPositions = new ArrayList<>();

@@ -2,7 +2,6 @@ package com.ai_crypto_market.core.model.entity;
 
 import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TimeFrame;
-import com.ai_crypto_market.core.model.enums.TradeAction;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -29,7 +28,7 @@ public class Strategy extends AuditableEntity {
     private BigDecimal defaultTargetPercent;
 
     @Column(precision = 5, scale = 2)
-    private int defaultLeverage;
+    private BigDecimal defaultLeverage;
 
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal defaultPercentOfAvailablePerPosition; // این استراتژی میخواد بره از ولت طرف بیت بخره. بهش میگیم اولین بار که میخوای بخری به این میزان درصد از موجودی ولت برو خرید کن.
@@ -87,11 +86,11 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public int getDefaultLeverage() {
+    public BigDecimal getDefaultLeverage() {
         return defaultLeverage;
     }
 
-    public Strategy setDefaultLeverage(int defaultLeverage) {
+    public Strategy setDefaultLeverage(BigDecimal defaultLeverage) {
         this.defaultLeverage = defaultLeverage;
         return this;
     }

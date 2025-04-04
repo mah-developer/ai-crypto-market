@@ -1,18 +1,23 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
+import com.ai_crypto_market.core.model.enums.ExchangeName;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 @Qualifier("ExchangeBingXService")
-public class ExchangeServiceBingXImpl implements ExchangeService {
+public class ExchangeServiceBingXImpl extends ExchangeServiceCommonImpl {
 
     @Override
-    public String ExchangeInformation() {
+    public ExchangeName getExchangeName() {
+        return ExchangeName.BING_X;
+    }
+
+    @Override
+    public String exchangeInformation() {
 
         String result = "";
         return result;
@@ -20,12 +25,12 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
 
 
     @Override
-    public String OpenPosition(Strategy strategy) {
+    public String openPosition(Strategy strategy) {
         return "";
     }
 
     @Override
-    public String ClosePosition(Long amount) {
+    public String closePosition(Long amount) {
         String response = "sell executed in CoinMarketCap with this amount: " + amount;
         System.out.println(response);
         return response;
@@ -33,7 +38,7 @@ public class ExchangeServiceBingXImpl implements ExchangeService {
 
 
     @Override
-    public String GetBalance(Long amount) {
+    public String getBalance(Long amount) {
         String response = "long executed in CoinMarketCap with this amount: " + amount;
         System.out.println(response);
         return response;

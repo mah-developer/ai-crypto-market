@@ -4,6 +4,7 @@ import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
 import com.ai_crypto_market.core.model.enums.PositionActivity;
 import com.ai_crypto_market.core.model.enums.PositionType;
+import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,11 @@ import java.util.List;
 @Service
 @Qualifier("signalServiceFibonacci")
 public class StrategyServiceFibonacciImpl implements StrategyService {
+
+    @Override
+    public StrategyType getStrategyType() {
+        return StrategyType.FIBONACCI;
+    }
 
     @Override
     public Position analyzeUpdate(Position position,Position newPosition,List<Position> positionHistoryBasedOnExchangeId) {
