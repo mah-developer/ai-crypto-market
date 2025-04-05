@@ -3,10 +3,10 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.Stock;
 
 import java.util.List;
+import java.util.Set;
 
 public interface StockService {
     Stock getFullStockInfoFromExternalServiceApi(Stock stock);
-    // todo میشه اینو توی انتیتی استراتژی بیاریم که لیستی از استاک برگردونه؟ Transient
-    List<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId);
+    Set<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId);
 
 }

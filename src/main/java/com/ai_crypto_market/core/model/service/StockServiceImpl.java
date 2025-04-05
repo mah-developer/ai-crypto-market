@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -29,7 +30,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId) {
+    public Set<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId) {
         return stockRepository.findAllByStrategyIdOrderByCreatedAtDesc(strategyId);
     }
 

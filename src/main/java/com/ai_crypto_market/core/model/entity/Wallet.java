@@ -44,7 +44,7 @@ public class Wallet extends AuditableEntity {
     private BigDecimal maxPercentOfAvailablePerPosition;
 
     @Column(nullable = false)
-    private boolean status; // if true we can trade and means wallet is on and if false means wallet is off and no any trade do on this wallet
+    private boolean isActive; // if true we can trade and means wallet is on and if false means wallet is off and no any trade do on this wallet
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_Strategy", nullable = false)
@@ -129,12 +129,12 @@ public class Wallet extends AuditableEntity {
         return this;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public Wallet setStatus(boolean status) {
-        this.status = status;
+    public Wallet setActive(boolean active) {
+        isActive = active;
         return this;
     }
 

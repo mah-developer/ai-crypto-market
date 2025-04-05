@@ -12,6 +12,6 @@ import java.util.List;
 public interface WalletRepository extends JpaRepository<Wallet, Long> {
     List<Wallet> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId);
     List<Wallet> getWalletByExchangeIdOrderByCreatedAtDesc(Long ExchangeId);
-    @Query("select w from Wallet w where w.status = true ORDER BY w.createdAt DESC")
+    @Query("select w from Wallet w where w.isActive ORDER BY w.createdAt DESC")
     List<Wallet> getAllActiveWalletOrderByCreatedAtDesc();
 }
