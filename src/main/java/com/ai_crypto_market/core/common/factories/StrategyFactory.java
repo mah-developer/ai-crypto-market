@@ -15,7 +15,10 @@ public class StrategyFactory {
     private final Map<StrategyType, StrategyService> strategyMap = new EnumMap<>(StrategyType.class);
 
     /**
-     * @implNote Eeach implementation of StrategyService must provide its own strategy type (via a getStrategyType() method). The factory auto-discovers all such beans and builds a lookup map.
+     * @implNote
+     * <p style="color:green; font-weight:bold;">
+     *     Eeach implementation of {@link StrategyService} must provide its own strategy type (via a getStrategyType() method). The factory auto-discovers all such beans and builds a lookup map.
+     *     </p>
      * */
     public StrategyFactory(List<StrategyService> strategyServices) {
         // Auto-register each StrategyService by its associated StrategyType
