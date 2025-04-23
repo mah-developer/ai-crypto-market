@@ -6,6 +6,7 @@ import com.ai_crypto_market.core.model.enums.PositionActivity;
 import com.ai_crypto_market.core.model.enums.PositionType;
 import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.enums.TradeAction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-@Qualifier("signalServiceFibonacci")
+@Qualifier("strategyServiceFibonacci")
 public class StrategyServiceFibonacciImpl implements StrategyService {
+
+    @Qualifier("apiServiceTaapi")
+    @Autowired
+    private ApiService apiServiceTaapi;
 
     @Override
     public StrategyType getStrategyType() {
@@ -128,4 +133,6 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
     public void onInitialApplicationPersistDefaultStrategy() {
 
     }
+
+
 }

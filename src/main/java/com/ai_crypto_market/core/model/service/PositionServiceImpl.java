@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class PositionServiceImpl implements PositionService {
     @Autowired
-    @Qualifier("signalServiceFibonacci")
+    @Qualifier("strategyServiceFibonacci")
     private StrategyService strategyServiceFibonacci;
 
     @Autowired
