@@ -109,6 +109,7 @@ import com.ai_crypto_market.core.common.factories.ExchangeFactory;
 import com.ai_crypto_market.core.common.factories.StrategyFactory;
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.Strategy;
 import com.ai_crypto_market.core.model.entity.Wallet;
 import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.ai_crypto_market.core.model.enums.TradeAction;
@@ -151,13 +152,14 @@ public class TradeServiceImpl implements TradeService {
 
         for (Position openedPosition : openPositions) {
             ExchangeName exchangeName = openedPosition.getWallet().getExchange().getExchangeName();
+            Strategy strategy = openedPosition.getWallet().getStrategy();
             ExchangeService exchangeService = exchangeFactory.getExchange(exchangeName);
 
             // Refresh position info from the exchange
             openedPosition = exchangeService.getPositionInfoFromExchangeServiceApi(openedPosition);
 
             // Enrich stock information
-            Stock updatedStock = stockService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock());
+            Stock updatedStock = stockService.getFullStockInfoFromExternalServiceApi(openedPosition.getStrategy().getStock(), exchangeName, strategy.getTimeFrame());
             openedPosition.getStrategy().setStock(updatedStock);
 
             // Analyze the position to determine the trade action
@@ -179,12 +181,14 @@ public class TradeServiceImpl implements TradeService {
         List<Wallet> activeWallets = walletService.getAllActiveWalletOrderByCreatedAtDesc();
 
         for (Wallet wallet : activeWallets) {
-            ExchangeService exchangeService = exchangeFactory.getExchange(wallet.getExchange().getExchangeName());
+            ExchangeName exchangeName = wallet.getExchange().getExchangeName();
+            Strategy strategy = wallet.getStrategy();
+            ExchangeService exchangeService = exchangeFactory.getExchange(exchangeName);
             StrategyService strategyService = strategyFactory.getStrategy(wallet.getStrategy().getType());
 
             Set<Stock> stocks =  stockService.findAllByStrategyIdOrderByCreatedAtDesc(wallet.getStrategy().getId());
             for (Stock stock : stocks) {
-                Stock fullStock = stockService.getFullStockInfoFromExternalServiceApi(stock);
+                Stock fullStock = stockService.getFullStockInfoFromExternalServiceApi(stock, exchangeName, strategy.getTimeFrame());
                 Position analyzedPosition = strategyService.analyzeNew(fullStock);
                 if (TradeAction.BUY.equals(analyzedPosition.getTradeAction())) {
                     exchangeService.buy(analyzedPosition);

@@ -1,6 +1,8 @@
 package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.common.api.GenericApiClient;
+import com.ai_crypto_market.core.model.entity.Position;
+import com.ai_crypto_market.core.model.entity.Stock;
 import com.ai_crypto_market.core.model.entity.taapi.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,14 +68,19 @@ public class ApiServiceTaapiImpl implements ApiService {
         return response.getBody();
     }
 
-    public RsiResponse getRsiIndicator(String exchange, String symbol, String interval) {
+    public RsiResponse getRsiIndicator(String exchange, String symbol, String interval, String backTrack) {
         // todo complete and refine
+        // backtrack=1
         Map<String, String> queryParams = Map.of(
                 "secret", secret,
                 "exchange", exchange,
                 "symbol", symbol,
                 "interval", interval
         );
+
+        if (backTrack != null) {
+            queryParams.put("backtrack", backTrack);
+        }
 
         ResponseEntity<RsiResponse> response = apiClient.exchange(
                 baseUrl,
@@ -169,4 +176,41 @@ public class ApiServiceTaapiImpl implements ApiService {
         return response.getBody();
     }
 
+
+    public Object getExchangeInfo(String exchange, String symbol, String interval) {
+        Map<String, String> queryParams = Map.of(
+                "secret", secret,
+                "exchange", exchange,
+                "symbol", symbol,
+                "interval", interval
+        );
+
+        ResponseEntity<Object> response = apiClient.exchange(
+                baseUrl,
+                macdPath,
+                HttpMethod.GET,
+                queryParams,
+                null,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
+
+    public Object getPositionInfoFromExchangeServiceApi(Position openedPosition) {
+        Map<String, String> queryParams = Map.of(
+                "name", "ali"
+        );
+
+        ResponseEntity<Object> response = apiClient.exchange(
+                "binance.com",
+                "/fapi/v3/positionRisk",
+                HttpMethod.GET,
+                queryParams,
+                null,
+                null,
+                new ParameterizedTypeReference<>() {}
+        );
+        return response.getBody();
+    }
 }

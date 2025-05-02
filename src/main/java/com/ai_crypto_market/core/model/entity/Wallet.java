@@ -49,6 +49,7 @@ public class Wallet extends AuditableEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_STRATEGY", nullable = false)
     private Strategy strategy;
+    
 
     // GETTERS AND SETTERS
 

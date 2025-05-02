@@ -40,7 +40,7 @@ public class TestController {
             @RequestParam String symbol,
             @RequestParam String interval
     ) {
-        return apiServiceTaapi.getRsiIndicator(exchange, symbol, interval);
+        return apiServiceTaapi.getRsiIndicator(exchange, symbol, interval, null);
     }
 
     /**

@@ -3,6 +3,8 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.*;
 import com.ai_crypto_market.core.model.enums.ExchangeName;
 import com.binance.connector.futures.client.impl.UMFuturesClientImpl;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,11 @@ import java.util.List;
 @Service
 @Qualifier("ExchangeBinanceService")
 public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
-    String API_KEY="";
-    String API_SECRET="";
+    @Autowired
+    private ApiServiceTaapiImpl taapi;
+
+    String API_KEY = "";
+    String API_SECRET = "";
 
 
     @Override
@@ -129,6 +134,9 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
     @Override
     public Position getPositionInfoFromExchangeServiceApi(Position openedPosition) {
         System.out.println("get current price from exchange api ...");
+
+        Object info=taapi.getPositionInfoFromExchangeServiceApi(openedPosition);
+//        JSONObject
         // GET MarketPrice and position info(profit):  /fapi/v3/positionRisk
         //   Request Parameters
         //   Name	    Type	Mandatory
