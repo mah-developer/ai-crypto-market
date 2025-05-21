@@ -14,11 +14,6 @@ public class WalletServiceImpl implements WalletService {
     WalletRepository walletRepository;
 
     @Override
-    public List<Wallet> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId) {
-        return walletRepository.findAllByStrategyIdOrderByCreatedAtDesc(strategyId);
-    }
-
-    @Override
     public List<Wallet> getAllActiveWalletOrderByCreatedAtDesc() {
         return walletRepository.getAllActiveWalletOrderByCreatedAtDesc();
     }

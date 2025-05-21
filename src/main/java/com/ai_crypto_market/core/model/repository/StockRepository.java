@@ -13,7 +13,4 @@ import java.util.Set;
 
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
-    @Query("select o from Stock o join fetch o.strategies i where i.id =:strategyId order by o.createdAt desc ")
-    Set<Stock> findAllByStrategyIdOrderByCreatedAtDesc(@Param("strategyId") Long strategyId);
-
 }
