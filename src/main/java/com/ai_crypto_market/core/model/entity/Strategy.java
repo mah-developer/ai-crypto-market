@@ -5,6 +5,9 @@ import com.ai_crypto_market.core.model.enums.TimeFrame;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_STRATEGY")
@@ -14,9 +17,8 @@ public class Strategy extends AuditableEntity {
     @Column(name = "PK_TB_STRATEGY")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_STOCK", nullable = false)
-    private Stock stock;
+//    @OneToMany(mappedBy = "strategy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Stock> stocks = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     private StrategyType type;
@@ -30,11 +32,10 @@ public class Strategy extends AuditableEntity {
     @Column(precision = 5, scale = 2)
     private BigDecimal defaultLeverage;
 
-    @Column(nullable = false, precision = 5, scale = 2)
-    private BigDecimal defaultPercentOfAvailablePerPosition; // این استراتژی میخواد بره از ولت طرف بیت بخره. بهش میگیم اولین بار که میخوای بخری به این میزان درصد از موجودی ولت برو خرید کن.
-
     @Enumerated(EnumType.STRING)
     private TimeFrame timeFrame;
+
+    private String category;
 
     // GETTERS AND SETTERS
 
@@ -42,12 +43,12 @@ public class Strategy extends AuditableEntity {
         return id;
     }
 
-    public Stock getStock() {
-        return stock;
+    public String getCategory() {
+        return category;
     }
 
-    public Strategy setStock(Stock stock) {
-        this.stock = stock;
+    public Strategy setCategory(String category) {
+        this.category = category;
         return this;
     }
 
@@ -95,12 +96,5 @@ public class Strategy extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getDefaultPercentOfAvailablePerPosition() {
-        return defaultPercentOfAvailablePerPosition;
-    }
 
-    public Strategy setDefaultPercentOfAvailablePerPosition(BigDecimal defaultPercentOfAvailablePerPosition) {
-        this.defaultPercentOfAvailablePerPosition = defaultPercentOfAvailablePerPosition;
-        return this;
-    }
 }

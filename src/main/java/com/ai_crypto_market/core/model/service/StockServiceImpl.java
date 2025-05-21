@@ -15,7 +15,7 @@ public class StockServiceImpl implements StockService {
     StockRepository stockRepository;
 
     @Override
-    public Stock getFullStockInfoFromExternalServiceApi(Stock stock) {
+    public Stock getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(Stock stock) {
         // previously filled these items: id, name, symbol
         stock.setRsi("39,32,43,65,80"); // last 5 items based on timeFrame
         stock.setMa7("20");
@@ -26,6 +26,7 @@ public class StockServiceImpl implements StockService {
         stock.setPriceAction(50);
         stock.setAiNews(20);
         stock.setSmartMoney(21);
+        // todo: Do related calculations
         return stock;
     }
 
@@ -33,5 +34,11 @@ public class StockServiceImpl implements StockService {
     public Set<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId) {
         return stockRepository.findAllByStrategyIdOrderByCreatedAtDesc(strategyId);
     }
+
+    @Override
+    public List<Stock> findAll() {
+        return stockRepository.findAll();
+    }
+
 
 }

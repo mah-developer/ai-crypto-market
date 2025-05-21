@@ -1,7 +1,9 @@
 package com.ai_crypto_market.core.model.service;
 
+import com.ai_crypto_market.core.model.entity.AppConfig;
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.Wallet;
 import com.ai_crypto_market.core.model.enums.PositionActivity;
 import com.ai_crypto_market.core.model.enums.PositionType;
 import com.ai_crypto_market.core.model.enums.StrategyType;

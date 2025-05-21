@@ -74,4 +74,9 @@ public class ExchangeServiceBingXImpl extends ExchangeServiceCommonImpl {
         return openedPosition;
     }
 
+    @Override
+    public int checkWeightStock(Stock stock) {
+        return 0;
+    }
+
 }

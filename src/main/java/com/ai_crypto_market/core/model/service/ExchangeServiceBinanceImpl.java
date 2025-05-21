@@ -32,17 +32,6 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
 
     @Override
     public String openPosition(Strategy strategy) {
-        strategy.getStock().getExchangeStocks().stream().forEach(exchangeStock -> {
-            exchangeStock.getExchange().getWallets().stream().forEach(wallet -> {
-                // todo call binance api
-            });
-        });
-
-        for (ExchangeStock exchangeStock : strategy.getStock().getExchangeStocks()) {
-            for (Wallet wallet : exchangeStock.getExchange().getWallets()) {
-                // todo call binance api
-            }
-        }
 
         return "";
     }
@@ -73,6 +62,8 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
 
     @Override
     public Position buy(Position openedPosition) {
+        // todo
+
         return null;
     }
 
@@ -163,6 +154,11 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
         openedPosition.setCurrentPrice(new BigDecimal(20));//"markPrice"
         openedPosition.getWallet().setAvailableBalance(BigDecimal.valueOf(100));//"isolatedWallet"
         return openedPosition;
+    }
+
+    @Override
+    public int checkWeightStock(Stock stock) {
+        return 0;
     }
 
 

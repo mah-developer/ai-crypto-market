@@ -3,6 +3,7 @@ package com.ai_crypto_market.core.model.service;
 import com.ai_crypto_market.core.model.entity.News;
 import com.ai_crypto_market.core.model.entity.Position;
 import com.ai_crypto_market.core.model.entity.Stock;
+import com.ai_crypto_market.core.model.entity.Wallet;
 import com.ai_crypto_market.core.model.enums.StrategyType;
 import com.ai_crypto_market.core.model.repository.NewsRepository;
 import com.ai_crypto_market.core.model.repository.StockRepository;

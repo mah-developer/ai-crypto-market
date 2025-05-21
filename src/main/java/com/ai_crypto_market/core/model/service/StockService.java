@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface StockService {
-    Stock getFullStockInfoFromExternalServiceApi(Stock stock);
+    Stock getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(Stock stock);
     Set<Stock> findAllByStrategyIdOrderByCreatedAtDesc(Long strategyId);
-
+    List<Stock> findAll();
 }

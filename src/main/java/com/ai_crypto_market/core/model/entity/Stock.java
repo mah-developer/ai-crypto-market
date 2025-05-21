@@ -13,6 +13,12 @@ public class Stock extends AuditableEntity {
     @Column(name = "PK_TB_STOCK")
     private Long id;
 
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ExchangeStock> exchangeStocks = new HashSet<>();
+
+    @OneToMany(mappedBy = "stock",cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Position> positions = new HashSet<>();
+
     @Column(nullable = false)
     private String name;
 
@@ -38,11 +44,9 @@ public class Stock extends AuditableEntity {
     @Transient
     private int smartMoney;
 
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Strategy> strategies = new HashSet<>();
-
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ExchangeStock> exchangeStocks = new HashSet<>();
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "FK_STRATEGY", nullable = false)
+//    private Strategy strategy;
 
     // GETTERS AND SETTERS
 
@@ -149,21 +153,21 @@ public class Stock extends AuditableEntity {
         return this;
     }
 
-    public Set<Strategy> getStrategies() {
-        return strategies;
-    }
-
-    public Stock setStrategies(Set<Strategy> strategies) {
-        this.strategies = strategies;
-        return this;
-    }
-
     public Set<ExchangeStock> getExchangeStocks() {
         return exchangeStocks;
     }
 
     public Stock setExchangeStocks(Set<ExchangeStock> exchangeStocks) {
         this.exchangeStocks = exchangeStocks;
+        return this;
+    }
+
+    public Set<Position> getPositions() {
+        return positions;
+    }
+
+    public Stock setPositions(Set<Position> positions) {
+        this.positions = positions;
         return this;
     }
 }

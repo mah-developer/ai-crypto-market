@@ -17,4 +17,6 @@ public interface ExchangeService {
     Position sell(Position openedPosition);
     Stock getCandlestickDataFromExchangeServiceApi(Stock stock);
     Position getPositionInfoFromExchangeServiceApi(Position openedPosition);
+
+    int checkWeightStock(Stock stock);
 }

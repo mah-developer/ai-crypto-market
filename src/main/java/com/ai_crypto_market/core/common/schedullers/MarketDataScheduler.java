@@ -6,22 +6,45 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * Scheduler responsible for triggering trading-related tasks at fixed intervals.
+ */
 @Component
 public class MarketDataScheduler {
+
     private final TradeService tradeService;
 
     public MarketDataScheduler(TradeService tradeService) {
         this.tradeService = tradeService;
     }
 
-    @Scheduled(fixedRate = 30000)
-    public void scheduled() {
-        System.out.println("MarketDataScheduler scheduled at " + LocalDateTime.now());
+    /**
+     * Handles open trading positions every 30 minutes.
+     * fixedRate = 1800000 milliseconds (30 minutes)
+     */
+    @Scheduled(fixedRate = 1800000)
+    public void handleOpenPositionsScheduledTask() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("[SCHEDULER] Handling open positions at " + now);
         try {
-            tradeService.doTrade();
+            tradeService.handleOpenPositions();
         } catch (Exception e) {
-            System.out.println("MarketDataScheduler- Error occurred during trading: " + e.getMessage());
+            System.err.println("[ERROR] Exception while handling open positions at " + now + ": " + e.getMessage());
         }
     }
 
+    /**
+     * Scans for new trading opportunities every 5 minutes.
+     * fixedRate = 300000 milliseconds (5 minutes)
+     */
+    @Scheduled(fixedRate = 300000)
+    public void handleNewOpportunitiesScheduledTask() {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("[SCHEDULER] Scanning for new opportunities at " + now);
+        try {
+            tradeService.handleNewOpportunities();
+        } catch (Exception e) {
+            System.err.println("[ERROR] Exception while scanning for new opportunities at " + now + ": " + e.getMessage());
+        }
+    }
 }

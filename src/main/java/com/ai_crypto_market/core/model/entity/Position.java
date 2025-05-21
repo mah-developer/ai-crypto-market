@@ -22,6 +22,10 @@ public class Position extends AuditableEntity {
     @JoinColumn(name = "FK_WALLET")
     private Wallet wallet;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_STOCK")
+    private Stock stock;
+
     @Enumerated(EnumType.STRING)
     private PositionStatus positionStatus;
 
@@ -65,6 +69,8 @@ public class Position extends AuditableEntity {
 
     @Transient
     private BigDecimal currentPrice;
+
+    private Integer buyPercentOfAvailableBalance;
 
     // GETTERS AND SETTERS
 
@@ -222,6 +228,24 @@ public class Position extends AuditableEntity {
 
     public Position setCurrentPrice(BigDecimal currentPrice) {
         this.currentPrice = currentPrice;
+        return this;
+    }
+
+    public Integer getBuyPercentOfAvailableBalance() {
+        return buyPercentOfAvailableBalance;
+    }
+
+    public Position setBuyPercentOfAvailableBalance(Integer buyPercentOfAvailableBalance) {
+        this.buyPercentOfAvailableBalance = buyPercentOfAvailableBalance;
+        return this;
+    }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public Position setStock(Stock stock) {
+        this.stock = stock;
         return this;
     }
 }

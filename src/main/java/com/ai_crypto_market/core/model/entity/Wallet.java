@@ -46,9 +46,9 @@ public class Wallet extends AuditableEntity {
     @Column(nullable = false)
     private boolean isActive; // if true we can trade and means wallet is on and if false means wallet is off and no any trade do on this wallet
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_STRATEGY", nullable = false)
-    private Strategy strategy;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "FK_STRATEGY", nullable = false)
+//    private Strategy strategy;
 
     // GETTERS AND SETTERS
 
@@ -137,13 +137,13 @@ public class Wallet extends AuditableEntity {
         isActive = active;
         return this;
     }
-
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public Wallet setStrategy(Strategy strategy) {
-        this.strategy = strategy;
-        return this;
-    }
+//
+//    public Strategy getStrategy() {
+//        return strategy;
+//    }
+//
+//    public Wallet setStrategy(Strategy strategy) {
+//        this.strategy = strategy;
+//        return this;
+//    }
 }
