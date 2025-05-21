@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Data
 @Builder
-public class RsiResponse {
+public class VolumeResponse {
     private String symbol;
     private String exchange;
     private String interval;
@@ -16,7 +16,7 @@ public class RsiResponse {
 
     @Override
     public String toString() {
-        return "RsiResponse{" +
+        return "VolResponse{" +
                 "symbol='" + symbol + '\'' +
                 ", exchange='" + exchange + '\'' +
                 ", interval='" + interval + '\'' +
