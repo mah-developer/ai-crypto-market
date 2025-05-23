@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,11 +96,11 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position providePosition(Stock stock, Wallet wallet, MarketTrend marketTrend) {
-        Position position = new Position();
-        position.setPositionType(calculatePositionTypeBasedOn(stock, marketTrend));
+    public Position providePosition(Position position, MarketTrend marketTrend) {
+        //Position position = new Position();
+        position.setPositionType(calculatePositionTypeBasedOn(position.getStock(), marketTrend));
         position.setTradeAction(calculateTradeAction(position.getPositionType()));
-        position.setQuantity(calculateQuantityBasedOn(wallet));
+        position.setQuantity(calculateQuantityBasedOn(position.getWallet())); // todo need stock price heare
         //...
 
         return position;
@@ -115,11 +116,18 @@ public class PositionServiceImpl implements PositionService {
 
     private BigDecimal calculateQuantityBasedOn(Wallet wallet) {
         AppConfig appConfig = appConfigService.getAppConfig();
-        int defaultPercentOfAvailablePerCryptoPosition = appConfig.getDefaultPercentOfAvailablePerCryptoPosition();
-        BigDecimal maxPercentOfAvailablePerPosition = wallet.getMaxPercentOfAvailablePerPosition();
+        int defaultPercent = appConfig.getDefaultPercentOfAvailablePerCryptoPosition();
+        BigDecimal maxPercent = wallet.getMaxPercentOfAvailablePerPosition();
         BigDecimal availableBalance = wallet.getAvailableBalance();
-        BigDecimal result = new BigDecimal(0);
-        return result;
+
+        BigDecimal percentageToUse = maxPercent.min(new BigDecimal(defaultPercent).divide(new BigDecimal(100)));
+        BigDecimal resultUsdt = availableBalance.multiply(percentageToUse);
+        resultUsdt = resultUsdt.setScale(2, RoundingMode.HALF_UP); // rounding for precision
+
+        // todo   get price of stock and calculate Quantity
+        BigDecimal stockPrice = new BigDecimal(360);
+        BigDecimal quantity = resultUsdt.divide(stockPrice, 10, RoundingMode.HALF_UP); // Ensuring proper precision
+        return quantity;
     }
 
     private PositionType calculatePositionTypeBasedOn(Stock stock, MarketTrend marketTrend) {

@@ -16,6 +16,6 @@ public interface PositionService {
 
     List<Position> getOpenPositions();
 
-    Position providePosition(Stock stock, Wallet wallet, MarketTrend marketTrend);
+    Position providePosition(Position position, MarketTrend marketTrend);
 
 }

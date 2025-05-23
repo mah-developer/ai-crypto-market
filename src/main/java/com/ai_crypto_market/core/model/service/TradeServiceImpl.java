@@ -58,16 +58,16 @@ public class TradeServiceImpl implements TradeService {
             openedPosition = exchangeService.getPositionInfoFromExchangeServiceApi(openedPosition);
 
             // Enrich stock information
-            Stock updatedStock = stockService.getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(openedPosition.getStock());
-            openedPosition.setStock(updatedStock);
+            openedPosition = stockService.getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(openedPosition);
+            //openedPosition.setStock(updatedStock);
 
             // Analyze the position to determine the trade action
             Position analyzedPosition = positionService.analyze(openedPosition);
 
             // Execute the appropriate action based on the trade decision
             switch (analyzedPosition.getTradeAction()) {
-                case BUY -> exchangeService.buy(analyzedPosition);
-                case CLOSE -> exchangeService.sell(analyzedPosition);
+                case BUY -> exchangeService.openPosition(analyzedPosition);
+                case CLOSE -> exchangeService.closePosition(analyzedPosition);
                 case CHANGETPSL -> positionService.changeTargetPriceAndStopLoss(analyzedPosition);
                 default -> {
                     // Optional: Log unsupported or no-action cases here.
@@ -81,16 +81,28 @@ public class TradeServiceImpl implements TradeService {
     public void handleNewOpportunities() {
         AppConfig appConfig = appConfigService.getAppConfig(); // todo: should load in first load as a global Bean
         List<Stock> stocks = stockService.findAll();
-        List<Stock> fullStocks = new ArrayList<>();
+
+        //List<Stock> fullStocks = new ArrayList<>();
+
         MarketTrend marketTrend = calculateMarketTrend();
         stocks.forEach(stock -> {
-            Stock fullStock = stockService.getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(stock);
+            ExchangeService exchangeService = exchangeFactory.getExchange(appConfig.getdefaultExchangeCryptoName());
+
+            Position newPosition=new Position();
+            newPosition.setStock(stock);
+            newPosition.getWallet().getExchange().setExchangeName(exchangeService.getExchangeName());
+
+            newPosition = exchangeService.getNewPositionInfoFromExchangeServiceApi(newPosition);
+            newPosition = stockService.getFullStockInfoFromExternalServiceApiAndProvideMoreAnaliticInfoOfThisStock(newPosition);
+
             List<Wallet> activeWallets = walletService.getAllActiveWalletOrderByCreatedAtDesc();
             for (Wallet wallet : activeWallets) {
-                Position analyzedPosition = positionService.providePosition(fullStock, wallet, marketTrend);
-                ExchangeService exchangeService = exchangeFactory.getExchange(wallet.getExchange().getExchangeName());
+                newPosition.setWallet(wallet);
+
+                Position analyzedPosition = positionService.providePosition(newPosition, marketTrend);
+                exchangeService = exchangeFactory.getExchange(wallet.getExchange().getExchangeName());
                 if (analyzedPosition.getTradeAction() == TradeAction.BUY) {
-                    exchangeService.buy(analyzedPosition);
+                    exchangeService.openPosition(analyzedPosition);
                 }
             }
         });
