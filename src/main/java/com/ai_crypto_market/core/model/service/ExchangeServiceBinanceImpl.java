@@ -2,6 +2,7 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
 import com.ai_crypto_market.core.model.enums.ExchangeName;
+import com.ai_crypto_market.core.model.enums.TimeFrame;
 import com.binance.connector.futures.client.impl.UMFuturesClientImpl;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
         parameters.put("type", "MARKET");
         parameters.put("timeInForce", "GTC");
         parameters.put("quantity", position.getQuantity());
-        parameters.put("price", position.getCurrentPrice());
+        parameters.put("price", position.getStock().getCurrentPrice());
 
         String result = client.account().newOrder(parameters);
         return result;
@@ -67,12 +68,6 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
         return response;
     }
 
-    @Override
-    public String getAvalableBalance(Wallet wallet) {
-        String response = "long executed in binance with this amount: " ;
-        System.out.println(response);
-        return response;
-    }
 
     @Override
     public Stock getCandleAndVolume(Stock stock) {
@@ -103,11 +98,29 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
         stock.setCandle("12,22,23,24;31,32,33,34;41,42,43,44;51,52,53,54"); // last 5 items based on timeFrame
         return stock;
     }
+
     @Override
-    public Position getNewPositionInfoFromExchangeServiceApi(Position openedPosition) {
+    public Stock getStockInfoFromExchangeServiceApi(Stock stock, TimeFrame timeFrame) {
         System.out.println("get current price from exchange api ...");
-        return openedPosition;
+
+
+
+        stock.setVolume("65,54,42,87,69"); // last 5 items based on timeFrame
+        stock.setCandle("12,22,23,24;31,32,33,34;41,42,43,44;51,52,53,54"); // last 5 items based on timeFrame
+        stock.setCurrentPrice(new BigDecimal(20));//"markPrice"
+
+        return stock;
     }
+
+    @Override
+    public Wallet getAvalableBalance(Wallet wallet) {
+        String response = "long executed in binance with this amount: " ;
+        System.out.println(response);
+
+        wallet.setAvailableBalance(wallet.getAvailableBalance());
+        return wallet;
+    }
+
 
     @Override
     public Position getPositionInfoFromExchangeServiceApi(Position openedPosition) {
@@ -146,7 +159,7 @@ public class ExchangeServiceBinanceImpl extends ExchangeServiceCommonImpl {
         //  }
         //]
         openedPosition.setProfit(new BigDecimal(2));//"unRealizedProfit"
-        openedPosition.setCurrentPrice(new BigDecimal(20));//"markPrice"
+        openedPosition.getStock().setCurrentPrice(new BigDecimal(20));//"markPrice"
         openedPosition.getWallet().setAvailableBalance(BigDecimal.valueOf(100));//"isolatedWallet"
         return openedPosition;
     }

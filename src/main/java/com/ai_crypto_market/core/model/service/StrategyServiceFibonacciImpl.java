@@ -35,7 +35,7 @@ public class StrategyServiceFibonacciImpl implements StrategyService {
 
         BigDecimal currentTP = position.getCurrentTargetPrice();
         BigDecimal currentSL = position.getCurrentStopLoss();
-        BigDecimal currentPrice = position.getCurrentPrice();
+        BigDecimal currentPrice = position.getStock().getCurrentPrice();
         BigDecimal currentProfit = position.getProfit();
         BigDecimal entryPrice = position.getEntryPrice();
         BigDecimal quantity = position.getQuantity(); //

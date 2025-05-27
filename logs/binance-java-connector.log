@@ -1,34 +1,34 @@
-2025-05-23 17:36:18.992[1748009178992] | INFO  | main       | c.a.core.CoreApplication             - Starting CoreApplication using Java 21.0.5 with PID 4340 (E:\_AiCrypto\ai-crypto-market-git\target\classes started by Administrator in E:\_AiCrypto\ai-crypto-market-git)
-2025-05-23 17:36:18.993[1748009178993] | INFO  | main       | c.a.core.CoreApplication             - No active profile set, falling back to 1 default profile: "default"
-2025-05-23 17:36:23.464[1748009183464] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-05-23 17:36:23.465[1748009183465] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2025-05-23 17:36:23.503[1748009183503] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.AppConfigRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.505[1748009183505] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.ExchangeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.507[1748009183507] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.ExchangeStockHistoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.508[1748009183508] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.NewsRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.509[1748009183509] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.PositionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.511[1748009183511] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.StockRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.512[1748009183512] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.StrategyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.513[1748009183513] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.WalletRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
-2025-05-23 17:36:23.514[1748009183514] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 JDBC repository interfaces.
-2025-05-23 17:36:23.521[1748009183521] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2025-05-23 17:36:23.522[1748009183522] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-23 17:36:23.613[1748009183613] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 8 JPA repository interfaces.
-2025-05-23 17:36:24.795[1748009184795] | INFO  | main       | o.s.b.w.e.tomcat.TomcatWebServer     - Tomcat initialized with port 8585 (http)
-2025-05-23 17:36:24.807[1748009184807] | INFO  | main       | o.a.coyote.http11.Http11NioProtocol  - Initializing ProtocolHandler ["http-nio-8585"]
-2025-05-23 17:36:24.809[1748009184809] | INFO  | main       | o.a.catalina.core.StandardService    - Starting service [Tomcat]
-2025-05-23 17:36:24.809[1748009184809] | INFO  | main       | o.a.catalina.core.StandardEngine     - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-05-23 17:36:24.888[1748009184888] | INFO  | main       | o.a.c.c.C.[Tomcat].[localhost].[/]   - Initializing Spring embedded WebApplicationContext
-2025-05-23 17:36:24.888[1748009184888] | INFO  | main       | o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4746 ms
-2025-05-23 17:36:25.488[1748009185488] | INFO  | main       | o.h.jpa.internal.util.LogHelper      - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-23 17:36:25.649[1748009185649] | INFO  | main       | org.hibernate.Version                - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-05-23 17:36:25.688[1748009185688] | INFO  | main       | o.h.c.i.RegionFactoryInitiator       - HHH000026: Second-level cache disabled
-2025-05-23 17:36:26.196[1748009186196] | INFO  | main       | o.s.o.j.p.SpringPersistenceUnitInfo  - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-23 17:36:26.257[1748009186257] | INFO  | main       | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Starting...
-2025-05-23 17:36:31.163[1748009191163] | INFO  | main       | com.zaxxer.hikari.pool.HikariPool    - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@5c839677
-2025-05-23 17:36:31.164[1748009191164] | INFO  | main       | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Start completed.
-2025-05-23 17:36:32.342[1748009192342] | WARN  | main       | org.hibernate.orm.deprecation        - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-23 17:36:32.667[1748009192667] | INFO  | main       | o.hibernate.orm.connections.pooling  - HHH10001005: Database info:
+2025-05-28 02:28:32.065[1748386712065] | INFO  | main       | c.a.core.CoreApplication             - Starting CoreApplication using Java 21.0.5 with PID 9332 (E:\_AiCrypto\ai-crypto-market-git\target\classes started by Administrator in E:\_AiCrypto\ai-crypto-market-git)
+2025-05-28 02:28:32.066[1748386712066] | INFO  | main       | c.a.core.CoreApplication             - No active profile set, falling back to 1 default profile: "default"
+2025-05-28 02:28:34.436[1748386714436] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 02:28:34.437[1748386714437] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-05-28 02:28:34.658[1748386714658] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.AppConfigRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.660[1748386714660] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.ExchangeRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.661[1748386714661] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.ExchangeStockHistoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.662[1748386714662] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.NewsRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.663[1748386714663] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.PositionRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.664[1748386714664] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.StockRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.666[1748386714666] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.StrategyRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.667[1748386714667] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.ai_crypto_market.core.model.repository.WalletRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2025-05-28 02:28:34.668[1748386714668] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 97 ms. Found 0 JDBC repository interfaces.
+2025-05-28 02:28:34.675[1748386714675] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-28 02:28:34.676[1748386714676] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-28 02:28:34.730[1748386714730] | INFO  | main       | o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 8 JPA repository interfaces.
+2025-05-28 02:28:35.725[1748386715725] | INFO  | main       | o.s.b.w.e.tomcat.TomcatWebServer     - Tomcat initialized with port 8585 (http)
+2025-05-28 02:28:35.746[1748386715746] | INFO  | main       | o.a.coyote.http11.Http11NioProtocol  - Initializing ProtocolHandler ["http-nio-8585"]
+2025-05-28 02:28:35.748[1748386715748] | INFO  | main       | o.a.catalina.core.StandardService    - Starting service [Tomcat]
+2025-05-28 02:28:35.748[1748386715748] | INFO  | main       | o.a.catalina.core.StandardEngine     - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-05-28 02:28:35.835[1748386715835] | INFO  | main       | o.a.c.c.C.[Tomcat].[localhost].[/]   - Initializing Spring embedded WebApplicationContext
+2025-05-28 02:28:35.835[1748386715835] | INFO  | main       | o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3633 ms
+2025-05-28 02:28:36.394[1748386716394] | INFO  | main       | o.h.jpa.internal.util.LogHelper      - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-28 02:28:36.547[1748386716547] | INFO  | main       | org.hibernate.Version                - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-05-28 02:28:36.585[1748386716585] | INFO  | main       | o.h.c.i.RegionFactoryInitiator       - HHH000026: Second-level cache disabled
+2025-05-28 02:28:37.066[1748386717066] | INFO  | main       | o.s.o.j.p.SpringPersistenceUnitInfo  - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-28 02:28:37.113[1748386717113] | INFO  | main       | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Starting...
+2025-05-28 02:28:39.685[1748386719685] | INFO  | main       | com.zaxxer.hikari.pool.HikariPool    - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@165d1d54
+2025-05-28 02:28:39.687[1748386719687] | INFO  | main       | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Start completed.
+2025-05-28 02:28:40.298[1748386720298] | WARN  | main       | org.hibernate.orm.deprecation        - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-28 02:28:40.512[1748386720512] | INFO  | main       | o.hibernate.orm.connections.pooling  - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 23.6
@@ -36,35 +36,35 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-05-23 17:36:35.101[1748009195101] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:43.770[1748386723770] | DEBUG | main       | org.hibernate.SQL                    - 
     create global temporary table HTE_position(buy_percent_of_available_balance number(10, 0), current_stop_loss number(15, 2), current_target_price number(15, 2), entry_price number(15, 2), exit_price number(15, 2), leverage number(10, 0), quantity number(15, 2), rn_ number(10, 0) not null, created_at timestamp(6), deleted_at timestamp(6), entry_time timestamp(6), exit_time timestamp(6), fk_stock number(19, 0), fk_strategy number(19, 0), fk_wallet number(19, 0), id number(19, 0), updated_at timestamp(6), activities varchar2(255 char), exchange_position_id varchar2(255 char), position_status varchar2(255 char), position_type varchar2(255 char), primary key (rn_)) 
         on commit delete rows
-2025-05-23 17:36:36.801[1748009196801] | INFO  | main       | o.h.e.t.j.p.i.JtaPlatformInitiator   - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-23 17:36:36.816[1748009196816] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:44.685[1748386724685] | INFO  | main       | o.h.e.t.j.p.i.JtaPlatformInitiator   - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-28 02:28:44.724[1748386724724] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists exchange cascade constraints
-2025-05-23 17:36:37.050[1748009197050] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.066[1748386725066] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists position cascade constraints
-2025-05-23 17:36:37.053[1748009197053] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.068[1748386725068] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_app_config cascade constraints
-2025-05-23 17:36:37.066[1748009197066] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.070[1748386725070] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_exchange_stock cascade constraints
-2025-05-23 17:36:37.068[1748009197068] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.072[1748386725072] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_exchange_stock_history cascade constraints
-2025-05-23 17:36:37.181[1748009197181] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.073[1748386725073] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_news cascade constraints
-2025-05-23 17:36:37.186[1748009197186] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.075[1748386725075] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_stock cascade constraints
-2025-05-23 17:36:37.190[1748009197190] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.077[1748386725077] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_strategy cascade constraints
-2025-05-23 17:36:37.213[1748009197213] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.079[1748386725079] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_user cascade constraints
-2025-05-23 17:36:37.215[1748009197215] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.080[1748386725080] | DEBUG | main       | org.hibernate.SQL                    - 
     drop table if exists tb_wallet cascade constraints
-2025-05-23 17:36:37.217[1748009197217] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.082[1748386725082] | DEBUG | main       | org.hibernate.SQL                    - 
     drop sequence if exists position_seq
-2025-05-23 17:36:37.240[1748009197240] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.120[1748386725120] | DEBUG | main       | org.hibernate.SQL                    - 
     create sequence position_seq start with 1 increment by 50
-2025-05-23 17:36:37.719[1748009197719] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:45.886[1748386725886] | DEBUG | main       | org.hibernate.SQL                    - 
     create table exchange (
         created_at timestamp(6) not null,
         deleted_at timestamp(6),
@@ -75,7 +75,7 @@
         market_type varchar2(255 char) not null check (market_type in ('FX','CRYPTO')),
         primary key (pk_tb_exchange)
     )
-2025-05-23 17:36:39.009[1748009199009] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.660[1748386726660] | DEBUG | main       | org.hibernate.SQL                    - 
     create table position (
         buy_percent_of_available_balance number(10,0),
         current_stop_loss number(15,2),
@@ -99,7 +99,7 @@
         position_type varchar2(255 char) check (position_type in ('SHORT','LONG','NONE')),
         primary key (id)
     )
-2025-05-23 17:36:39.054[1748009199054] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.719[1748386726719] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_app_config (
         allowed_weight_for_open_new_position_crypto_stock number(10,0) not null,
         default_exchange_crypto_name number(3,0) check (default_exchange_crypto_name between 0 and 3),
@@ -108,7 +108,7 @@
         pk_tb_app_config number(19,0) generated by default as identity,
         primary key (pk_tb_app_config)
     )
-2025-05-23 17:36:39.113[1748009199113] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.761[1748386726761] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_exchange_stock (
         lot number(15,2) not null,
         created_at timestamp(6) not null,
@@ -118,7 +118,7 @@
         updated_at timestamp(6),
         primary key (exchange_id, stock_id)
     )
-2025-05-23 17:36:39.181[1748009199181] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.828[1748386726828] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_exchange_stock_history (
         close_price number(15,2) not null,
         high number(15,2) not null,
@@ -134,7 +134,7 @@
         change_type varchar2(255 char) not null check (change_type in ('INSERT','UPDATE','DELETE')),
         primary key (pk_tb_exchange_stock_history)
     )
-2025-05-23 17:36:39.272[1748009199272] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.878[1748386726878] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_news (
         created_at timestamp(6) not null,
         deleted_at timestamp(6),
@@ -148,7 +148,7 @@
         title varchar2(255 char) not null,
         primary key (pk_tb_news)
     )
-2025-05-23 17:36:39.331[1748009199331] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.912[1748386726912] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_stock (
         created_at timestamp(6) not null,
         deleted_at timestamp(6),
@@ -158,7 +158,7 @@
         symbol varchar2(255 char) not null unique,
         primary key (pk_tb_stock)
     )
-2025-05-23 17:36:39.406[1748009199406] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:46.971[1748386726971] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_strategy (
         default_leverage number(5,2),
         default_stop_loss_percent number(5,2),
@@ -172,7 +172,7 @@
         type varchar2(255 char) check (type in ('FIBONACCI','HOLIDAY','NEWS')),
         primary key (pk_tb_strategy)
     )
-2025-05-23 17:36:39.456[1748009199456] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.029[1748386727029] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_user (
         created_at timestamp(6) not null,
         deleted_at timestamp(6),
@@ -186,7 +186,7 @@
         role varchar2(255 char) not null check (role in ('ADMIN','TRADER','BOT')),
         primary key (pk_tb_user)
     )
-2025-05-23 17:36:39.489[1748009199489] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.079[1748386727079] | DEBUG | main       | org.hibernate.SQL                    - 
     create table tb_wallet (
         available_balance number(15,2) not null,
         is_active boolean not null,
@@ -203,10 +203,10 @@
         name varchar2(255 char) not null,
         primary key (pk_tb_wallet)
     )
-2025-05-23 17:36:39.548[1748009199548] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.130[1748386727130] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_name 
        on exchange (name)
-2025-05-23 17:36:39.587[1748009199587] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+2025-05-28 02:28:47.133[1748386727133] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
     create index idx_name 
        on exchange (name)" via JDBC [ORA-00904: "NAME": invalid identifier
 
@@ -280,13 +280,13 @@ Caused by: oracle.jdbc.OracleDatabaseException: ORA-00904: "NAME": invalid ident
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:717)
 	... 54 common frames omitted
-2025-05-23 17:36:39.600[1748009199600] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.146[1748386727146] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_api_url 
        on exchange (api_url)
-2025-05-23 17:36:39.807[1748009199807] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.246[1748386727246] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_exchange_stock 
        on tb_exchange_stock (exchange_id, stock_id)
-2025-05-23 17:36:39.917[1748009199917] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+2025-05-28 02:28:47.297[1748386727297] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
     create index idx_exchange_stock 
        on tb_exchange_stock (exchange_id, stock_id)" via JDBC [ORA-01408: such column list already indexed
 
@@ -360,10 +360,10 @@ Caused by: oracle.jdbc.OracleDatabaseException: ORA-01408: such column list alre
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:717)
 	... 54 common frames omitted
-2025-05-23 17:36:39.918[1748009199918] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.297[1748386727297] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_email 
        on tb_user (email)
-2025-05-23 17:36:39.982[1748009199982] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
+2025-05-28 02:28:47.321[1748386727321] | WARN  | main       | o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
     create index idx_email 
        on tb_user (email)" via JDBC [ORA-01408: such column list already indexed
 
@@ -437,59 +437,59 @@ Caused by: oracle.jdbc.OracleDatabaseException: ORA-01408: such column list alre
 
 	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:717)
 	... 54 common frames omitted
-2025-05-23 17:36:39.983[1748009199983] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.322[1748386727322] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_fk_user 
        on tb_wallet (fk_user)
-2025-05-23 17:36:40.082[1748009200082] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.363[1748386727363] | DEBUG | main       | org.hibernate.SQL                    - 
     create index idx_fk_exchange 
        on tb_wallet (fk_exchange)
-2025-05-23 17:36:40.157[1748009200157] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.446[1748386727446] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists position 
        add constraint FKjn7vcudifmb4876hpgduf8a7m 
        foreign key (fk_stock) 
        references tb_stock
-2025-05-23 17:36:41.182[1748009201182] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.755[1748386727755] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists position 
        add constraint FKb68byvlg9wc7abs09piu3we79 
        foreign key (fk_strategy) 
        references tb_strategy
-2025-05-23 17:36:41.232[1748009201232] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.797[1748386727797] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists position 
        add constraint FKtd1rph4m3wp4eay8tq5so44tf 
        foreign key (fk_wallet) 
        references tb_wallet
-2025-05-23 17:36:41.324[1748009201324] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.830[1748386727830] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists tb_exchange_stock 
        add constraint FK7mt82s6142hhbay4f45c1g8up 
        foreign key (exchange_id) 
        references exchange
-2025-05-23 17:36:41.382[1748009201382] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.939[1748386727939] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists tb_exchange_stock 
        add constraint FKsadi4frelxsrggxmvkrvr2907 
        foreign key (stock_id) 
        references tb_stock
-2025-05-23 17:36:41.482[1748009201482] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:47.963[1748386727963] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists tb_exchange_stock_history 
        add constraint FK8ewit8luqur74gkddalfm8f0d 
        foreign key (exchange_id, stock_id) 
        references tb_exchange_stock
-2025-05-23 17:36:41.607[1748009201607] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:48.014[1748386728014] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists tb_wallet 
        add constraint FKrgk60qau9uu83w6dk7bd4a5rr 
        foreign key (fk_exchange) 
        references exchange
-2025-05-23 17:36:41.683[1748009201683] | DEBUG | main       | org.hibernate.SQL                    - 
+2025-05-28 02:28:48.064[1748386728064] | DEBUG | main       | org.hibernate.SQL                    - 
     alter table if exists tb_wallet 
        add constraint FK7kd2fupx6el1x8cu3thmhdwp8 
        foreign key (fk_user) 
        references tb_user
-2025-05-23 17:36:41.719[1748009201719] | INFO  | main       | o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-23 17:36:42.494[1748009202494] | INFO  | main       | o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-05-23 17:36:43.143[1748009203143] | WARN  | main       | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-23 17:36:44.238[1748009204238] | INFO  | main       | o.a.coyote.http11.Http11NioProtocol  - Starting ProtocolHandler ["http-nio-8585"]
-2025-05-23 17:36:44.270[1748009204270] | INFO  | main       | o.s.b.w.e.tomcat.TomcatWebServer     - Tomcat started on port 8585 (http) with context path '/'
-2025-05-23 17:36:44.299[1748009204299] | INFO  | main       | c.a.core.CoreApplication             - Started CoreApplication in 27.833 seconds (process running for 35.15)
-2025-05-23 17:36:44.448[1748009204448] | DEBUG | scheduling-1 | org.hibernate.SQL                    - 
+2025-05-28 02:28:48.133[1748386728133] | INFO  | main       | o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-28 02:28:48.967[1748386728967] | INFO  | main       | o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-28 02:28:49.572[1748386729572] | WARN  | main       | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-28 02:28:51.553[1748386731553] | INFO  | main       | o.a.coyote.http11.Http11NioProtocol  - Starting ProtocolHandler ["http-nio-8585"]
+2025-05-28 02:28:51.601[1748386731601] | INFO  | main       | o.s.b.w.e.tomcat.TomcatWebServer     - Tomcat started on port 8585 (http) with context path '/'
+2025-05-28 02:28:51.619[1748386731619] | INFO  | main       | c.a.core.CoreApplication             - Started CoreApplication in 21.048 seconds (process running for 25.345)
+2025-05-28 02:28:51.752[1748386731752] | DEBUG | scheduling-1 | org.hibernate.SQL                    - 
     select
         ac1_0.pk_tb_app_config,
         ac1_0.allowed_weight_for_open_new_position_crypto_stock,
@@ -498,30 +498,30 @@ Caused by: oracle.jdbc.OracleDatabaseException: ORA-01408: such column list alre
         ac1_0.default_time_frame_crypto 
     from
         tb_app_config ac1_0
-2025-05-23 17:37:40.546[1748009260546] | INFO  | SpringApplicationShutdownHook | o.s.b.w.e.tomcat.GracefulShutdown    - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-23 17:37:40.550[1748009260550] | INFO  | tomcat-shutdown | o.s.b.w.e.tomcat.GracefulShutdown    - Graceful shutdown complete
-2025-05-23 17:37:40.579[1748009260579] | INFO  | SpringApplicationShutdownHook | o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-23 17:37:40.579[1748009260579] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:57.483[1748386737483] | INFO  | SpringApplicationShutdownHook | o.s.b.w.e.tomcat.GracefulShutdown    - Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-28 02:28:57.486[1748386737486] | INFO  | tomcat-shutdown | o.s.b.w.e.tomcat.GracefulShutdown    - Graceful shutdown complete
+2025-05-28 02:28:57.489[1748386737489] | INFO  | SpringApplicationShutdownHook | o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-28 02:28:57.490[1748386737490] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists exchange cascade constraints
-2025-05-23 17:37:42.359[1748009262359] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.584[1748386738584] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists position cascade constraints
-2025-05-23 17:37:42.453[1748009262453] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.642[1748386738642] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_app_config cascade constraints
-2025-05-23 17:37:42.536[1748009262536] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.683[1748386738683] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_exchange_stock cascade constraints
-2025-05-23 17:37:42.728[1748009262728] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.776[1748386738776] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_exchange_stock_history cascade constraints
-2025-05-23 17:37:42.837[1748009262837] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.876[1748386738876] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_news cascade constraints
-2025-05-23 17:37:42.954[1748009262954] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.943[1748386738943] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_stock cascade constraints
-2025-05-23 17:37:43.104[1748009263104] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:58.985[1748386738985] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_strategy cascade constraints
-2025-05-23 17:37:43.220[1748009263220] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:59.027[1748386739027] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_user cascade constraints
-2025-05-23 17:37:43.338[1748009263338] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:59.094[1748386739094] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop table if exists tb_wallet cascade constraints
-2025-05-23 17:37:43.472[1748009263472] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
+2025-05-28 02:28:59.144[1748386739144] | DEBUG | SpringApplicationShutdownHook | org.hibernate.SQL                    - 
     drop sequence if exists position_seq
-2025-05-23 17:37:44.007[1748009264007] | INFO  | SpringApplicationShutdownHook | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Shutdown initiated...
-2025-05-23 17:37:44.094[1748009264094] | INFO  | SpringApplicationShutdownHook | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Shutdown completed.
+2025-05-28 02:28:59.288[1748386739288] | INFO  | SpringApplicationShutdownHook | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Shutdown initiated...
+2025-05-28 02:28:59.342[1748386739342] | INFO  | SpringApplicationShutdownHook | com.zaxxer.hikari.HikariDataSource   - HikariPool-1 - Shutdown completed.

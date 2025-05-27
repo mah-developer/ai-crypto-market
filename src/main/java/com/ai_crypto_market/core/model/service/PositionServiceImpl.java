@@ -33,21 +33,21 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public Position analyze(Position openedPosition) {
-        if (openedPosition.getStrategy() == null) {
-            openedPosition.setStrategy(provideStrategyBasedOn(openedPosition));
-        }
+//        if (openedPosition.getStrategy() == null) {
+//            openedPosition.setStrategy(provideStrategyBasedOn(openedPosition));
+//        }
         StrategyService strategyService = strategyFactory(openedPosition.getStrategy().getType());
         List<Position> positionHistoryBasedOnExchangeId = findAllByExchangePositionIdOrderByCreatedAtDesc(openedPosition.getExchangePositionId());
         Position newPosition = fillPositionObject(openedPosition);
         return strategyService.analyzeUpdate(openedPosition, newPosition, positionHistoryBasedOnExchangeId);
     }
 
-    private Strategy provideStrategyBasedOn(Position openedPosition) {
-        Strategy strategy = new Strategy();
-        // todo -> find strategy based on strategy room
-        strategy.setType(StrategyType.FIBONACCI);
-        return strategy;
-    }
+//    private Strategy provideStrategyBasedOn(Position openedPosition) {
+//        Strategy strategy = new Strategy();
+//        // todo -> find strategy based on strategy room
+//        strategy.setType(StrategyType.FIBONACCI);
+//        return strategy;
+//    }
 
 
     @Override
@@ -84,7 +84,7 @@ public class PositionServiceImpl implements PositionService {
         newPosition.setPositionType(position.getPositionType());
         newPosition.setProfit(position.getProfit());
         newPosition.setExchangePositionId(position.getExchangePositionId());
-        newPosition.setCurrentPrice(position.getCurrentPrice());
+        newPosition.getStock().setCurrentPrice(position.getStock().getCurrentPrice());
         return newPosition;
     }
 

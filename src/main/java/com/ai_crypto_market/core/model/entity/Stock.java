@@ -2,6 +2,7 @@ package com.ai_crypto_market.core.model.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,6 +44,8 @@ public class Stock extends AuditableEntity {
     private int aiNews;
     @Transient
     private int smartMoney;
+    @Transient
+    private BigDecimal currentPrice;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "FK_STRATEGY", nullable = false)
@@ -168,6 +171,15 @@ public class Stock extends AuditableEntity {
 
     public Stock setPositions(Set<Position> positions) {
         this.positions = positions;
+        return this;
+    }
+
+    public BigDecimal getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public Stock setCurrentPrice(BigDecimal currentPrice) {
+        this.currentPrice = currentPrice;
         return this;
     }
 }

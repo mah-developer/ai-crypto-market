@@ -2,6 +2,7 @@ package com.ai_crypto_market.core.model.service;
 
 import com.ai_crypto_market.core.model.entity.*;
 import com.ai_crypto_market.core.model.enums.ExchangeName;
+import com.ai_crypto_market.core.model.enums.TimeFrame;
 import com.binance.connector.futures.client.impl.UMFuturesClientImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ public class ExchangeServiceOandaImpl extends ExchangeServiceCommonImpl {
         parameters.put("type", "MARKET");
         parameters.put("timeInForce", "GTC");
         parameters.put("quantity", position.getQuantity());
-        parameters.put("price", position.getCurrentPrice());
+        parameters.put("price", position.getStock().getCurrentPrice());
 
         String result = client.account().newOrder(parameters);
         return result;
@@ -67,10 +68,10 @@ public class ExchangeServiceOandaImpl extends ExchangeServiceCommonImpl {
     }
 
     @Override
-    public String getAvalableBalance(Wallet wallet) {
+    public Wallet getAvalableBalance(Wallet wallet) {
         String response = "long executed in binance with this amount: " ;
         System.out.println(response);
-        return response;
+        return wallet;
     }
 
     @Override
@@ -103,9 +104,10 @@ public class ExchangeServiceOandaImpl extends ExchangeServiceCommonImpl {
         return stock;
     }
     @Override
-    public Position getNewPositionInfoFromExchangeServiceApi(Position openedPosition) {
+    public Stock getStockInfoFromExchangeServiceApi(Stock stock, TimeFrame timeFrame) {
         System.out.println("get current price from exchange api ...");
-        return openedPosition;
+
+        return stock;
     }
 
     @Override
@@ -145,7 +147,7 @@ public class ExchangeServiceOandaImpl extends ExchangeServiceCommonImpl {
         //  }
         //]
         openedPosition.setProfit(new BigDecimal(2));//"unRealizedProfit"
-        openedPosition.setCurrentPrice(new BigDecimal(20));//"markPrice"
+        openedPosition.getStock().setCurrentPrice(new BigDecimal(20));//"markPrice"
         openedPosition.getWallet().setAvailableBalance(BigDecimal.valueOf(100));//"isolatedWallet"
         return openedPosition;
     }

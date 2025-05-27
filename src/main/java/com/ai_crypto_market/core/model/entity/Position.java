@@ -67,8 +67,8 @@ public class Position extends AuditableEntity {
     @Transient
     private BigDecimal profit;
 
-    @Transient
-    private BigDecimal currentPrice;
+//    @Transient
+//    private BigDecimal currentPrice;
 
     private Integer buyPercentOfAvailableBalance;
 
@@ -222,14 +222,14 @@ public class Position extends AuditableEntity {
         return this;
     }
 
-    public BigDecimal getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public Position setCurrentPrice(BigDecimal currentPrice) {
-        this.currentPrice = currentPrice;
-        return this;
-    }
+//    public BigDecimal getCurrentPrice() {
+//        return currentPrice;
+//    }
+//
+//    public Position setCurrentPrice(BigDecimal currentPrice) {
+//        this.currentPrice = currentPrice;
+//        return this;
+//    }
 
     public Integer getBuyPercentOfAvailableBalance() {
         return buyPercentOfAvailableBalance;
